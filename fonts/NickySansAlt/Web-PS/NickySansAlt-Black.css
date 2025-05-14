@@ -1,0 +1,9 @@
+/* Webfont: NickySansAlt-Black */@font-face {
+    font-family: 'NickySansAltBlack';
+    src: url('NickySansAlt-Black.woff2') format('woff2'), /* Modern Browsers */
+         url('NickySansAlt-Black.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

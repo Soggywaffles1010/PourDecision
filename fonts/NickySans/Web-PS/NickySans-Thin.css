@@ -1,0 +1,9 @@
+/* Webfont: NickySans-Thin */@font-face {
+    font-family: 'NickySansThin';
+    src: url('NickySans-Thin.woff2') format('woff2'), /* Modern Browsers */
+         url('NickySans-Thin.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

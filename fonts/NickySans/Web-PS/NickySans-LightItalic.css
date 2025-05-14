@@ -1,0 +1,9 @@
+/* Webfont: NickySans-LightItalic */@font-face {
+    font-family: 'NickySansLight';
+    src: url('NickySans-LightItalic.woff2') format('woff2'), /* Modern Browsers */
+         url('NickySans-LightItalic.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: italic;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

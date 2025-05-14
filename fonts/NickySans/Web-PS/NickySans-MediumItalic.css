@@ -1,0 +1,9 @@
+/* Webfont: NickySans-MediumItalic */@font-face {
+    font-family: 'NickySansMed';
+    src: url('NickySans-MediumItalic.woff2') format('woff2'), /* Modern Browsers */
+         url('NickySans-MediumItalic.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: italic;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

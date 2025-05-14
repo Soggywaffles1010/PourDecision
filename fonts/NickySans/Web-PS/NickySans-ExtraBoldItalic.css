@@ -1,0 +1,9 @@
+/* Webfont: NickySans-ExtraBoldItalic */@font-face {
+    font-family: 'NickySansExtBd';
+    src: url('NickySans-ExtraBoldItalic.woff2') format('woff2'), /* Modern Browsers */
+         url('NickySans-ExtraBoldItalic.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: italic;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
