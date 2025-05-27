@@ -1,10 +1,33 @@
 'use client';
-import React, { useState } from 'react';
- 
-import { useRouter } from 'next/navigation'; // ← App Router
 
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { FiX } from 'react-icons/fi';
 
-
+// Modal Component
+const ExitConfirmModal = ({ onConfirm, onCancel }: { onConfirm: () => void; onCancel: () => void }) => (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="bg-white rounded-xl p-6 w-full max-w-md text-black">
+      <h3 className="text-xl font-semibold mb-4">Leave this page?</h3>
+      <p className="mb-6">Your changes will not be saved if you close this page.</p>
+      <div className="flex justify-end gap-4">
+        <button
+          onClick={onCancel}
+          className="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={onConfirm}
+          className="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700"
+        >
+          Leave Page
+        </button>
+      </div>
+    </div>
+  </div>
+);
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +38,10 @@ const ContactPage = () => {
   });
 
   const [status, setStatus] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+
+  const isFormDirty = Object.values(formData).some((val) => val.trim() !== '');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,11 +60,25 @@ const ContactPage = () => {
       setStatus('Message sent!');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => {
-      router.push('/');
-    }, 1500); // Wait 1.5 seconds before redirecting
+        router.push('/');
+      }, 1500);
     } else {
       setStatus('Failed to send message.');
     }
+  };
+
+  const handleExitClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isFormDirty) {
+      setShowModal(true);
+    } else {
+      router.push('/');
+    }
+  };
+
+  const confirmExit = () => {
+    setShowModal(false);
+    router.push('/');
   };
 
   return (
@@ -46,11 +86,13 @@ const ContactPage = () => {
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-lg p-8 rounded-2xl border border-white/20 backdrop-blur-md text-white space-y-5"
-        style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.08)',
-        }}
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)' }}
       >
-        <h2 className="text-3xl font-semibold mb-4">Contact Me</h2>
+        <div className='flex justify-between items-center'>
+          <h2 className="text-3xl font-semibold mb-4">Contact Me</h2>
+          <button onClick={handleExitClick} className="text-xl font-semibold mb-4 hover:text-red-400"> <FiX /></button>
+        </div>
+
         <input
           type="text"
           name="name"
@@ -100,6 +142,8 @@ const ContactPage = () => {
         </button>
         {status && <p className="text-sm">{status}</p>}
       </form>
+
+      {showModal && <ExitConfirmModal onConfirm={confirmExit} onCancel={() => setShowModal(false)} />}
     </div>
   );
 };

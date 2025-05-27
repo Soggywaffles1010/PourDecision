@@ -14,7 +14,7 @@ type BreadcrumbsProps = {
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ breadcrumbs }) => {
   return (
-    <div className="flex items-center gap-2 mx-[50px] rounded-xl backdrop-blur-md">
+    <div className="flex items-center gap-2 mx-[215px] rounded-xl backdrop-blur-md">
       {breadcrumbs.map((breadcrumb, index) => (
         <React.Fragment key={breadcrumb.link}>
           {/* If it's not the last breadcrumb, show separator */}

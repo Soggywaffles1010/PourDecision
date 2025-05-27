@@ -4,14 +4,27 @@ import GlassButton from './thbutton';
 import ProductCard from './card';
  
 import CategoryCard from './showroomcard';
+type Product = {
+  id: string;
+  media: string;
+  title: string;
+  author: string;
+  price: string;
+  sales: number;
+  rating: number;
+  link: string;
+  link2: string;
+  splineLink?: string;
+ 
+};
 
 type ShowroomProps = {
   categoryName: string;
   totalCategories: number;
   categoryImage: string;
   categoryDescription: string;
-  products: any[]; // The product data for the cards (could be an array of product objects)
-
+  products: Product[];
+  gridClassName?: string;
 };
 
 const Showroom: React.FC<ShowroomProps> = ({
@@ -20,14 +33,16 @@ const Showroom: React.FC<ShowroomProps> = ({
   categoryImage,
   categoryDescription,
   products,
+  gridClassName
+
  
  
 }) => {
   return (
-    <div className="mx-[50px] my-6 ">
+    <div className="mx-[50px] my-6  ">
        
-      <div className="flex justify-between items-center mb-4">
-        <div className="text-xl font-semibold">
+      <div className="flex-row flex justify-between gap-5 mb-4 mx-[140px] ">
+        <div className="text-xl font-semibold ml-[24px] ">
           {categoryName} ({totalCategories})
         </div>
         <GlassButton
@@ -41,7 +56,8 @@ const Showroom: React.FC<ShowroomProps> = ({
 
       </div>
 
-      <div className="grid grid-cols-4 gap-5">
+      <div className={gridClassName || 'flex-row flex justify-center gap-5'}>
+
         {/* First Column: Category Image and Description */}
           
         <CategoryCard
@@ -52,9 +68,9 @@ const Showroom: React.FC<ShowroomProps> = ({
         {/* Other 3 Columns: Product Cards */}
         {products.map((product, index) => (
   <ProductCard 
-    key={index}
+    key={product.id}
     id={product.id}
-    image={product.image}
+    media={product.media}
     title={product.title}
     author={product.author}
     price={product.price}
@@ -62,6 +78,7 @@ const Showroom: React.FC<ShowroomProps> = ({
     rating={product.rating}
    link={product.link}
    link2={product.link2}
+   splineLink={product.splineLink}
   />
 ))}
 

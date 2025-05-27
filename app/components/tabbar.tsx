@@ -13,13 +13,13 @@ const TabBar: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('themes'); // Default active tab is 'themes'
 
   const tabs: Tab[] = [
-    { id: 'themes', icon: <FaRegImages />, label: 'Themes' },
-    { id: 'images', icon: <FaCog />, label: 'Images' },
-    { id: 'graphics', icon: <FaStar />, label: 'Graphics' },
+    { id: 'Web Design', icon: <FaRegImages />, label: 'Web Design' },
+    { id: 'Graphic Designs', icon: <FaCog />, label: 'Graphic designs' },
+    { id: 'Videos', icon: <FaStar />, label: 'Videos' },
   ];
 
   return (
-    <div className="flex justify-center space-x-[20px] px-[50px] py-4 ">
+    <div className="flex justify-center space-x-[20px] px-[50px] py-4  ">
       {tabs.map((tab) => (
         <div
           key={tab.id}
