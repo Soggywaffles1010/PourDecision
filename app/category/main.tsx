@@ -1,7 +1,7 @@
+// main.tsx (CategoryPage component)
 'use client';
 
 import { useEffect, useState } from 'react';
- 
 import { Product, coffeeData } from '@/lib/coffeedata';
 import ProductCard from '../components/card';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -44,7 +44,7 @@ const CategoryPage = () => {
   const description = descriptions[activeCategory];
 
   return (
-    <div className="min-h-screen  text-white px-6 py-8">
+    <div className="min-h-screen text-white px-6 py-8">
       {/* Breadcrumb-like Tabs */}
       <div className="mb-6">
         <div className="flex gap-4 text-sm font-medium text-gray-400">

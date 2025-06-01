@@ -3,7 +3,7 @@ import React from 'react';
 import TabBar from './tabbar';
 // import Breadcrumbs from './breadcrumbs'; // Uncomment if using breadcrumbs
  
-  import { coffeeData } from '@/lib/coffeedata';
+import { coffeeData } from '@/lib/coffeedata';
 import Showroom from './showroom';
 
 const breadcrumbsData = [
