@@ -1,18 +1,14 @@
-import React from 'react'
-import CategoryPage from './main'
-import Header from '../components/header'
+// app/category/page.tsx (server component by default)
 
+import CategoryPage from './main'; // your client component
+import Header from '../components/header';
 
-const page = () => {
+// This function receives searchParams from Next.js routing
+export default function Page({ searchParams }: { searchParams: { type?: string } }) {
   return (
-    <div className=''>
-            <Header/>
-            <div className='mt-30'>
-                     <CategoryPage/>  
-            </div>
-            
+    <div>
+      <Header />
+      <CategoryPage initialType={searchParams.type} />
     </div>
-  )
+  );
 }
-
-export default page
