@@ -1,4 +1,3 @@
-// app/page.tsx or app/page.jsx (depending on your setup)
 import Image from "next/image";
 import Hero from "./components/hero";
 import Header from "./components/header";
@@ -9,12 +8,9 @@ export default function Home() {
     <div className="relative">
       <Header />
       <Hero />
-      {/* Add id to scroll target */}
-      <div id="category">
-        <Category />
-      </div>
+      <Category/>
       <div className="font-bold text-9xl">
-        Pour decision
+       ThemeHead
       </div>
     </div>
   );

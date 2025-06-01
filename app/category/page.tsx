@@ -1,16 +1,16 @@
 import Header from '../components/header';
-import CategoryPage from './main';
+import CategoryPage from './main'; // client component
 
-interface PageProps {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function Page({ searchParams }: PageProps) {
+export default function Page({
+  searchParams,
+}: {
+  searchParams?: { type?: string };
+}) {
   return (
     <div>
       <Header />
       <div className="mt-30">
-        <CategoryPage initialType={searchParams?.type as string} />
+        <CategoryPage initialType={searchParams?.type} />
       </div>
     </div>
   );
