@@ -1,14 +1,23 @@
-// app/category/page.tsx (server component by default)
-
-import CategoryPage from './main'; // your client component
+// app/category/page.tsx
+import React from 'react';
+import CategoryPage from './main';
 import Header from '../components/header';
 
-// This function receives searchParams from Next.js routing
-export default function Page({ searchParams }: { searchParams: { type?: string } }) {
+interface PageProps {
+  searchParams: {
+    type?: string;
+  };
+}
+
+const Page = ({ searchParams }: PageProps) => {
   return (
-    <div>
+    <div className="">
       <Header />
-      <CategoryPage initialType={searchParams.type} />
+      <div className="mt-30">
+        <CategoryPage initialType={searchParams.type} />
+      </div>
     </div>
   );
-}
+};
+
+export default Page;
