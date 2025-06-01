@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { RiDrinksFill, RiDrinks2Line } from "react-icons/ri";
 import { BiDrink } from "react-icons/bi";
+import { BiSolidDrink } from "react-icons/bi";
 
 type Tab = {
   id: string;
@@ -19,7 +20,7 @@ const TabBar: React.FC = () => {
     { id: 'Hot Drinks', icon: <RiDrinksFill />, label: 'Hot Drinks', query: 'hotDrinks' },
     { id: 'Cold Drinks', icon: <RiDrinks2Line />, label: 'Cold Drinks', query: 'coldDrinks' },
     { id: 'Frappe', icon: <BiDrink />, label: 'Frappe', query: 'frappe' },
-    { id: 'Soda', icon: <BiDrink />, label: 'Soda', query: 'soda' },
+    { id: 'Soda', icon: <BiSolidDrink />, label: 'Soda', query: 'soda' },
   ];
 
   const handleTabClick = (tab: Tab) => {
@@ -34,7 +35,7 @@ const TabBar: React.FC = () => {
           key={tab.id}
           onClick={() => handleTabClick(tab)}
           className={`flex flex-col items-center cursor-pointer transition-all duration-300 ease-in-out
-            ${activeTab === tab.id ? 'text-white' : 'text-gray-300'}
+            ${activeTab === tab.id ? 'text-yellow-900' : 'text-yellow-700'}
             hover:bg-white/20 hover:backdrop-blur-md hover:rounded-xl p-4 gap-2
             ${activeTab === tab.id ? 'bg-white/20 backdrop-blur-md rounded-xl' : ''}
           `}

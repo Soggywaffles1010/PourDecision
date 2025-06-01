@@ -54,7 +54,7 @@ const Showroom: React.FC<ShowroomProps> = ({
   return (
     <div className="mx-[50px] my-6 overflow-hidden">
       <div className="flex-row flex justify-between gap-5 mb-4 ">
-        <div className="text-xl font-semibold ">
+        <div className="text-xl font-semibold text-yellow-900 ">
           {categoryName} ({totalCategories})
         </div>
         <GlassButton

@@ -8,10 +8,11 @@ export default function Home() {
     <div className="relative">
       <Header />
       <Hero />
-      <Category/>
-      <div className="font-bold text-9xl">
-       ThemeHead
+      <div id="category">
+        <Category/>
       </div>
+      
+       
     </div>
   );
 }

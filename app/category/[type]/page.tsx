@@ -32,16 +32,16 @@ const CategoryContent = ({ activeCategory }: { activeCategory: CategoryKey }) =>
   const description = descriptions[activeCategory];
 
   return (
-    <div className="min-h-screen text-white px-6 py-8">
+    <div className="min-h-screen text-yello-700 px-6 py-8">
       {/* Breadcrumb-like Tabs */}
       <div className="mb-6">
-        <div className="flex gap-4 text-sm font-medium text-gray-400">
+        <div className="flex gap-4 text-sm font-medium text-yellow-700">
           {categories.map((cat) => (
             <a
               key={cat.key}
               href={`/category/${cat.key}`}
-              className={`hover:text-white transition-colors ${
-                activeCategory === cat.key ? 'text-white underline' : ''
+              className={`hover:text-yellow-50 transition-colors ${
+                activeCategory === cat.key ? 'text-yellow-50 underline' : ''
               }`}
             >
               {cat.label}
@@ -51,9 +51,9 @@ const CategoryContent = ({ activeCategory }: { activeCategory: CategoryKey }) =>
       </div>
 
       {/* Header */}
-      <div className="mb-10">
+      <div className="mb-10 text-yellow-900">
         <h1 className="text-3xl font-semibold mb-2">{title}</h1>
-        <p className="text-gray-400 max-w-xl">{description}</p>
+        <p className=" max-w-xl">{description}</p>
       </div>
 
       {/* Product Grid */}

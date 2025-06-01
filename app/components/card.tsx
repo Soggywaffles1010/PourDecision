@@ -82,7 +82,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               </span>
             ))}
           </div>
-          <div className="flex gap-4 text-yellow-700">
+          <div className="flex gap-4 text-yellow-900">
             <FiDownload size={20} />
             <FiBookmark size={20} />
             <FiHeart size={20} />
@@ -118,12 +118,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
 
           {/* Title & Author */}
-          <div className="text-lg font-semibold text-yellow-700">{title}</div>
+          <div className="text-lg font-semibold text-yellow-900">{title}</div>
           <div className="text-sm text-yellow-700/70">{author}</div>
 
           {/* Price & Sales */}
-          <div className="flex justify-between text-sm text-yellow-700 mt-2">
-            <div className="font-medium">{price}</div>
+          <div className="flex justify-between text-sm  mt-2">
+            <div className="text-xl text-yellow-900 font-extrabold">{price}</div>
             <div className="text-yellow-700/70">Sales: {sales}</div>
           </div>
         </div>
