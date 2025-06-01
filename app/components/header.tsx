@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Header = () => {
   const [showHeader, setShowHeader] = useState(false);
@@ -25,6 +26,7 @@ const Header = () => {
         
         {/* Logo */}
         <div className="w-24 h-24 overflow-hidden rounded-full mx-auto md:mx-0">
+          <Link href="/" className="w-24 h-24 overflow-hidden rounded-full mx-auto md:mx-0">
           <Image
             src="/images/1.png"
             alt="Logo"
@@ -32,6 +34,7 @@ const Header = () => {
             height={64}
             className="object-cover w-full h-full"
           />
+        </Link>
         </div>
 
         {/* Sign In (only visible on medium+ screens) */}

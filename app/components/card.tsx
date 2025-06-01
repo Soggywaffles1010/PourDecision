@@ -66,7 +66,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="relative bg-white/10 backdrop-blur-md rounded-xl p-4 flex flex-col hover:scale-105 transition-all duration-300 ease-in-out"
+        className="relative bg-white/10 backdrop-blur-md rounded-xl p-4 flex flex-col  hover:scale-105 transition-all duration-300 ease-in-out"
       >
         {/* Head */}
         <div className="flex justify-between items-start">
@@ -82,7 +82,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               </span>
             ))}
           </div>
-          <div className="flex gap-4 text-white">
+          <div className="flex gap-4 text-yellow-700">
             <FiDownload size={20} />
             <FiBookmark size={20} />
             <FiHeart size={20} />
@@ -109,7 +109,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               {isHovered && (
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="absolute top-2 right-2 bg-black/60 p-2 rounded-full text-white hover:bg-black/80 transition"
+                  className="absolute top-2 right-2 bg-black/20 p-2 rounded-full text-white hover:bg-white/80 transition"
                 >
                   <FiEye size={18} />
                 </button>
@@ -118,13 +118,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
 
           {/* Title & Author */}
-          <div className="text-lg font-semibold text-white">{title}</div>
-          <div className="text-sm text-white/70">{author}</div>
+          <div className="text-lg font-semibold text-yellow-700">{title}</div>
+          <div className="text-sm text-yellow-700/70">{author}</div>
 
           {/* Price & Sales */}
-          <div className="flex justify-between text-sm text-white mt-2">
+          <div className="flex justify-between text-sm text-yellow-700 mt-2">
             <div className="font-medium">{price}</div>
-            <div className="text-white/70">Sales: {sales}</div>
+            <div className="text-yellow-700/70">Sales: {sales}</div>
           </div>
         </div>
 

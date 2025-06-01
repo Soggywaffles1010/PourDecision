@@ -143,8 +143,8 @@ ${orders.map(o => `${o.product.title} x${o.quantity} = ₱${(parseFloat(o.produc
   };
 
   return (
-   <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 py-10 px-4">
-      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-lg">
+   <div className="min-h-screen flex flex-col items-center justify-center  py-10 px-4">
+      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-lg mt-30">
         <form onSubmit={handleSubmit} className="space-y-4 text-gray-600">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-semibold">Shipping Information</h2>

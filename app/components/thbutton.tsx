@@ -44,7 +44,7 @@ const GlassButton: React.FC<GlassButtonProps> = ({
       onClick={onClick}
       className={`cursor-pointer
         flex items-center gap-2 px-6 py-3 rounded-xl 
-        backdrop-blur-md border text-white font-medium
+        backdrop-blur-md border text-yellow-700 font-medium
         transition-all duration-300 ease-in-out 
         ${showButton ? 'opacity-100' : 'opacity-0'} 
         hover:scale-105 hover:bg-white/20

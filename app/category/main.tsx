@@ -44,7 +44,7 @@ const CategoryPage = () => {
   const description = descriptions[activeCategory];
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white px-6 py-8">
+    <div className="min-h-screen  text-white px-6 py-8">
       {/* Breadcrumb-like Tabs */}
       <div className="mb-6">
         <div className="flex gap-4 text-sm font-medium text-gray-400">

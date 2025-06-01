@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en"  className={`${nickySans.variable}`}>
       <body
-        className="font-nickySans"
+        className="font-nickySans "
       >
         {children}
       </body>

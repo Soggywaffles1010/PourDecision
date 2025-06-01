@@ -41,7 +41,7 @@ export const coffeeData: {
       rating: 5,
       link: 'https://elements.envato.com/photos/blanket',
       link2: '/Contact',
-      splineLink: 'https://prod.spline.design/2ah5ZzyFJ3rqD8DR/scene.splinecode',
+      
     },
     {
       id: '3',
