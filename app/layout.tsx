@@ -32,8 +32,8 @@ const nickySans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "2025 UI/UX Designer Portfolio",
-  description: "2025 UI/UX Designer Portfolio of Allen Rhoy Lazada Usman",
+  title: "Pour Decision",
+  description: "A coffeeshop in Digos",
 };
 
 export default function RootLayout({

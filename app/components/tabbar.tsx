@@ -1,37 +1,45 @@
-// components/TabBar.tsx
 'use client';
 import React, { useState } from 'react';
-import { FaRegImages, FaCog, FaStar } from 'react-icons/fa'; // Import icons from react-icons
+import { useRouter } from 'next/navigation';
+import { RiDrinksFill, RiDrinks2Line } from "react-icons/ri";
+import { BiDrink } from "react-icons/bi";
 
 type Tab = {
   id: string;
   icon: React.ReactNode;
   label: string;
+  query: string;
 };
 
 const TabBar: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('themes'); // Default active tab is 'themes'
+  const [activeTab, setActiveTab] = useState<string>('Hot Drinks');
+  const router = useRouter();
 
   const tabs: Tab[] = [
-    { id: 'Web Design', icon: <FaRegImages />, label: 'Web Design' },
-    { id: 'Graphic Designs', icon: <FaCog />, label: 'Graphic designs' },
-    { id: 'Videos', icon: <FaStar />, label: 'Videos' },
+    { id: 'Hot Drinks', icon: <RiDrinksFill />, label: 'Hot Drinks', query: 'hot-drinks' },
+    { id: 'Cold Drinks', icon: <RiDrinks2Line />, label: 'Cold Drinks', query: 'cold-drinks' },
+    { id: 'Frappe', icon: <BiDrink />, label: 'Frappe', query: 'frappe' },
   ];
 
+  const handleTabClick = (tab: Tab) => {
+    setActiveTab(tab.id);
+    router.push(`/category?type=${tab.query}`); // 👈 navigates with query
+  };
+
   return (
-    <div className="flex justify-center space-x-[20px] px-[50px] py-4  ">
+    <div className="flex justify-center space-x-[20px] px-[50px] py-4">
       {tabs.map((tab) => (
         <div
           key={tab.id}
-          onClick={() => setActiveTab(tab.id)} // Change active tab on click
+          onClick={() => handleTabClick(tab)}
           className={`flex flex-col items-center cursor-pointer transition-all duration-300 ease-in-out
             ${activeTab === tab.id ? 'text-white' : 'text-gray-300'}
             hover:bg-white/20 hover:backdrop-blur-md hover:rounded-xl p-4 gap-2
             ${activeTab === tab.id ? 'bg-white/20 backdrop-blur-md rounded-xl' : ''}
-            `}
+          `}
         >
-          <div className="text-3xl">{tab.icon}</div> {/* Icon */}
-          <div className="text-sm">{tab.label}</div> {/* Label */}
+          <div className="text-3xl">{tab.icon}</div>
+          <div className="text-sm">{tab.label}</div>
         </div>
       ))}
     </div>

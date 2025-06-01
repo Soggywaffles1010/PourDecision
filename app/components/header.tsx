@@ -21,20 +21,21 @@ const Header = () => {
         ${showHeader ? 'translate-y-0' : '-translate-y-full'}
       `}
     >
-      <div className="mx-20 h-full grid grid-cols-4 items-center gap-[20px]">
-        <div className="text-white font-bold">
-        <Image src="/images/logo.png" alt="Logo" width={200} height={100} >
-
-          </Image>
+      <div className="h-full px-6 md:px-20 flex items-center justify-between md:justify-start gap-4 md:gap-6">
+        
+        {/* Logo */}
+        <div className="w-24 h-24 overflow-hidden rounded-full mx-auto md:mx-0">
+          <Image
+            src="/images/1.png"
+            alt="Logo"
+            width={90}
+            height={64}
+            className="object-cover w-full h-full"
+          />
         </div>
 
-        <div className="col-span-2">
-          <div className="bg-white/30 text-white px-4 py-2 rounded-md backdrop-blur-md">
-            Searchbar
-          </div>
-        </div>
-
-        <div className="text-white text-right">Sign In</div>
+        {/* Sign In (only visible on medium+ screens) */}
+        <div className="hidden md:block text-white ml-auto">Sign In</div>
       </div>
     </div>
   );

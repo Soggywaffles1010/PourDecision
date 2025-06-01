@@ -104,7 +104,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               <img
                 src={media}
                 alt={title}
-                className="w-full h-48 object-cover rounded-xl mb-2"
+                className="w-full h-full object-cover rounded-xl mb-2"
               />
               {isHovered && (
                 <button
@@ -130,8 +130,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Tail Buttons */}
         <div className="flex gap-4 mt-4">
-          <GlassButton text="View Live" icon={<FiHeart />} link={link} />
-          <GlassButton text="Contact Me" icon={<FiDownload />} link={link2} />
+          <GlassButton text="Like" icon={<FiHeart />} link={""} />
+          <GlassButton
+  text="Place Order"
+  icon={<FiDownload />}
+  link={`/checkout?productId=${id}`}
+/>
+
         </div>
       </div>
 
@@ -147,14 +152,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </button>
    
      
-      {/* <Spline
-        scene="https://prod.spline.design/2ah5ZzyFJ3rqD8DR/scene.splinecode" 
-      /> */}
+      
  
 
       {splineLink ? (
          <Spline
-        scene={splineLink} 
+        scene="" 
       />
       ) : isVideo ? (
         <video
