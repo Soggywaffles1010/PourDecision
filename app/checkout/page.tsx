@@ -1,17 +1,9 @@
-import React from 'react'
-import ContactPage from './main'
-import Header from '../components/header'
+// app/category/page.tsx
+import { redirect } from 'next/navigation';
 
-const page = () => {
-  return (
-    <div>
-        <Header/>
-        
-         <ContactPage/>
-       
-        
-    </div>
-  )
-}
+const CategoryIndexPage = () => {
+  // Redirect to the default category (hotDrinks)
+  redirect('/checkout/[productId]');
+};
 
-export default page
+export default CategoryIndexPage;

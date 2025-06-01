@@ -134,7 +134,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <GlassButton
   text="Place Order"
   icon={<FiDownload />}
-  link={`/checkout?productId=${id}`}
+  link={`/checkout/${id}`}
 />
 
         </div>

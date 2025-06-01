@@ -16,14 +16,15 @@ const TabBar: React.FC = () => {
   const router = useRouter();
 
   const tabs: Tab[] = [
-    { id: 'Hot Drinks', icon: <RiDrinksFill />, label: 'Hot Drinks', query: 'hot-drinks' },
-    { id: 'Cold Drinks', icon: <RiDrinks2Line />, label: 'Cold Drinks', query: 'cold-drinks' },
+    { id: 'Hot Drinks', icon: <RiDrinksFill />, label: 'Hot Drinks', query: 'hotDrinks' },
+    { id: 'Cold Drinks', icon: <RiDrinks2Line />, label: 'Cold Drinks', query: 'coldDrinks' },
     { id: 'Frappe', icon: <BiDrink />, label: 'Frappe', query: 'frappe' },
+    { id: 'Soda', icon: <BiDrink />, label: 'Soda', query: 'soda' },
   ];
 
   const handleTabClick = (tab: Tab) => {
     setActiveTab(tab.id);
-    router.push(`/category?type=${tab.query}`); // 👈 navigates with query
+    router.push(`/category/${tab.query}`); // 👈 navigates with query
   };
 
   return (
