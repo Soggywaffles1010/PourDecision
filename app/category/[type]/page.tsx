@@ -1,13 +1,9 @@
-// Alternative: If you prefer client-side navigation with useRouter
-// app/category/[type]/page.tsx (Client-side navigation version)
-
-'use client';
-
+// app/category/[type]/page.tsx
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { Product, coffeeData } from '@/lib/coffeedata';
 import ProductCard from '../../components/card';
 import Header from '../../components/header';
+import { notFound } from 'next/navigation';
 
 const categories = [
   { label: 'Hot Drinks', key: 'hotDrinks' },
@@ -26,18 +22,12 @@ const descriptions: Record<string, string> = {
 type CategoryKey = keyof typeof coffeeData;
 
 interface PageProps {
-  params: {
+  params: Promise<{
     type: string;
-  };
+  }>;
 }
 
-const CategoryContent = ({ 
-  activeCategory, 
-  onCategoryChange 
-}: { 
-  activeCategory: CategoryKey;
-  onCategoryChange: (key: CategoryKey) => void;
-}) => {
+const CategoryContent = ({ activeCategory }: { activeCategory: CategoryKey }) => {
   const title = categories.find(c => c.key === activeCategory)?.label || '';
   const description = descriptions[activeCategory];
 
@@ -47,15 +37,15 @@ const CategoryContent = ({
       <div className="mb-6">
         <div className="flex gap-4 text-sm font-medium text-gray-400">
           {categories.map((cat) => (
-            <button
+            <a
               key={cat.key}
-              onClick={() => onCategoryChange(cat.key as CategoryKey)}
+              href={`/category/${cat.key}`}
               className={`hover:text-white transition-colors ${
                 activeCategory === cat.key ? 'text-white underline' : ''
               }`}
             >
               {cat.label}
-            </button>
+            </a>
           ))}
         </div>
       </div>
@@ -76,30 +66,22 @@ const CategoryContent = ({
   );
 };
 
-const CategoryPage = ({ params }: PageProps) => {
-  const router = useRouter();
-  const { type } = params;
+const CategoryPage = async ({ params }: PageProps) => {
+  // Await the params since it's now a Promise in Next.js 15+
+  const { type } = await params;
 
-  // Check if the category type is valid, redirect if not
+  // Check if the category type is valid
   if (!Object.keys(coffeeData).includes(type)) {
-    router.replace('/category/hotDrinks');
-    return null;
+    notFound(); // This will show a 404 page
   }
 
   const activeCategory = type as CategoryKey;
-
-  const handleCategoryChange = (key: CategoryKey) => {
-    router.push(`/category/${key}`);
-  };
 
   return (
     <div>
       <Header />
       <div className="mt-30">
-        <CategoryContent 
-          activeCategory={activeCategory} 
-          onCategoryChange={handleCategoryChange}
-        />
+        <CategoryContent activeCategory={activeCategory} />
       </div>
     </div>
   );
