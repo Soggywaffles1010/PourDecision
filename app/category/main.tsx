@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+ 
 import { Product, coffeeData } from '@/lib/coffeedata';
 import ProductCard from '../components/card';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 const categories = [
   { label: 'Hot Drinks', key: 'hotDrinks' },
@@ -21,19 +22,18 @@ const descriptions: Record<string, string> = {
 
 type CategoryKey = keyof typeof coffeeData;
 
-interface CategoryPageProps {
-  initialType?: string;
-}
-
-const CategoryPage = ({ initialType }: CategoryPageProps) => {
+const CategoryPage = () => {
+  const searchParams = useSearchParams();
   const router = useRouter();
+
   const [activeCategory, setActiveCategory] = useState<CategoryKey>('hotDrinks');
 
   useEffect(() => {
-    if (initialType && Object.keys(coffeeData).includes(initialType)) {
-      setActiveCategory(initialType as CategoryKey);
+    const typeParam = searchParams.get('type');
+    if (typeParam && Object.keys(coffeeData).includes(typeParam)) {
+      setActiveCategory(typeParam as CategoryKey);
     }
-  }, [initialType]);
+  }, [searchParams]);
 
   const handleCategoryChange = (key: CategoryKey) => {
     setActiveCategory(key);
@@ -44,11 +44,11 @@ const CategoryPage = ({ initialType }: CategoryPageProps) => {
   const description = descriptions[activeCategory];
 
   return (
-    <div className="min-h-screen text-white px-6 py-8">
+    <div className="min-h-screen  text-white px-6 py-8">
       {/* Breadcrumb-like Tabs */}
       <div className="mb-6">
         <div className="flex gap-4 text-sm font-medium text-gray-400">
-          {categories.map(cat => (
+          {categories.map((cat, index) => (
             <button
               key={cat.key}
               onClick={() => handleCategoryChange(cat.key as CategoryKey)}

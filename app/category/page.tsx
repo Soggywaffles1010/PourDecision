@@ -1,17 +1,18 @@
-import Header from '../components/header';
-import CategoryPage from './main'; // client component
+import React from 'react'
+import CategoryPage from './main'
+import Header from '../components/header'
 
-export default function Page({
-  searchParams,
-}: {
-  searchParams?: { type?: string };
-}) {
+
+const page = () => {
   return (
-    <div>
-      <Header />
-      <div className="mt-30">
-        <CategoryPage initialType={searchParams?.type} />
-      </div>
+    <div className=''>
+            <Header/>
+            <div className='mt-30'>
+                     <CategoryPage/>  
+            </div>
+            
     </div>
-  );
+  )
 }
+
+export default page
