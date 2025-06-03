@@ -1,4 +1,3 @@
-// app/category/[type]/page.tsx
 import React from 'react';
 import { Product, coffeeData } from '@/lib/coffeedata';
 import ProductCard from '../../components/card';
@@ -32,17 +31,21 @@ const CategoryContent = ({ activeCategory }: { activeCategory: CategoryKey }) =>
   const description = descriptions[activeCategory];
 
   return (
-    <div className="min-h-screen text-yello-700 px-6 py-8">
-      {/* Breadcrumb-like Tabs */}
+    <div className="min-h-screen px-6 py-10 font-nickysans text-foreground">
+      {/* Tab Nav */}
       <div className="mb-6">
-        <div className="flex gap-4 text-sm font-medium text-yellow-700">
+        <div className="flex flex-wrap gap-3 text-sm font-medium">
           {categories.map((cat) => (
             <a
               key={cat.key}
               href={`/category/${cat.key}`}
-              className={`hover:text-yellow-50 transition-colors ${
-                activeCategory === cat.key ? 'text-yellow-50 underline' : ''
-              }`}
+              className={`px-3 py-1 rounded-xl transition-all duration-200
+                ${
+                  activeCategory === cat.key
+                    ? 'text-accent bg-accent/10'
+                    : 'text-foreground/60 hover:text-accent hover:bg-accent/10'
+                }
+              `}
             >
               {cat.label}
             </a>
@@ -50,10 +53,10 @@ const CategoryContent = ({ activeCategory }: { activeCategory: CategoryKey }) =>
         </div>
       </div>
 
-      {/* Header */}
-      <div className="mb-10 text-yellow-900">
-        <h1 className="text-3xl font-semibold mb-2">{title}</h1>
-        <p className=" max-w-xl">{description}</p>
+      {/* Heading */}
+      <div className="mb-10 text-accent">
+        <h1 className="text-3xl font-semibold mb-1">{title}</h1>
+        <p className="text-sm max-w-xl text-foreground/80">{description}</p>
       </div>
 
       {/* Product Grid */}
@@ -67,12 +70,10 @@ const CategoryContent = ({ activeCategory }: { activeCategory: CategoryKey }) =>
 };
 
 const CategoryPage = async ({ params }: PageProps) => {
-  // Await the params since it's now a Promise in Next.js 15+
   const { type } = await params;
 
-  // Check if the category type is valid
   if (!Object.keys(coffeeData).includes(type)) {
-    notFound(); // This will show a 404 page
+    notFound();
   }
 
   const activeCategory = type as CategoryKey;
@@ -80,7 +81,7 @@ const CategoryPage = async ({ params }: PageProps) => {
   return (
     <div>
       <Header />
-      <div className="mt-30">
+      <div className="mt-20">
         <CategoryContent activeCategory={activeCategory} />
       </div>
     </div>

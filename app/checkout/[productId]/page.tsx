@@ -29,7 +29,7 @@ const CheckoutWithProductPage = async ({ params }: PageProps) => {
 
   return (
     <div>
-      <Header/>
+    
       <ContactPageWithProduct initialProductId={productId} />
     </div>
   )

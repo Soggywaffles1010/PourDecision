@@ -14,6 +14,7 @@ type GlassButtonProps = {
   fontWeight?: string;
   onClick?: () => void;
   link?: string;
+  className?: string;
 };
 
 const GlassButton: React.FC<GlassButtonProps> = ({
@@ -26,6 +27,7 @@ const GlassButton: React.FC<GlassButtonProps> = ({
   fontWeight = '500',
   onClick,
   link,
+  className,
 }) => {
   const [showButton, setShowButton] = useState(false);
 
@@ -34,37 +36,32 @@ const GlassButton: React.FC<GlassButtonProps> = ({
     return () => clearTimeout(timer);
   }, [delay]);
 
-  const buttonContent = (
-    <button
-      onClick={onClick}
-      className={`cursor-pointer flex items-center gap-2 
-        px-4 py-2 sm:px-6 sm:py-3 rounded-xl 
-        backdrop-blur-md border text-yellow-700
-        font-medium transition-all duration-300 ease-in-out
-        ${showButton ? 'opacity-100' : 'opacity-0'} 
-        hover:scale-105 hover:bg-white/20 
-        text-sm sm:text-base md:text-lg w-full sm:w-auto text-center
-      `}
-      style={{
-        backgroundColor: fill || 'rgba(255, 255, 255, 0.15)',
-        borderColor: stroke || 'rgba(255, 255, 255, 0.3)',
-        borderWidth: '1px',
-        fontWeight,
-        ...(fontSize ? { fontSize } : {}),
-      }}
-    >
-      {icon && <span>{icon}</span>}
-      {text}
-      {!icon && <FiArrowRight size={16} />}
-    </button>
-  );
+  const baseStyles = `
+    flex items-center justify-center gap-2
+    px-4 py-2 sm:px-6 sm:py-3
+    rounded-xl text-sm sm:text-base md:text-lg
+    backdrop-blur-md border transition-all duration-300 ease-in-out
+    font-medium text-foreground border-foreground
+    hover:bg-accent hover:text-background
+    hover:scale-105
+    ${showButton ? 'opacity-100' : 'opacity-0'}
+    ${className || ''}
+  `;
 
-  return link ? (
-    <Link href={link} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-      {buttonContent}
-    </Link>
-  ) : (
-    buttonContent
+  if (link) {
+    return (
+      <Link href={link} className={`w-full sm:w-auto ${baseStyles}`}>
+        {icon ?? <FiArrowRight size={18} />}
+        {text}
+      </Link>
+    );
+  }
+
+  return (
+    <button onClick={onClick} className={baseStyles}>
+      {icon ?? <FiArrowRight size={18} />}
+      {text}
+    </button>
   );
 };
 

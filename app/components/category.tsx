@@ -16,7 +16,7 @@ const Category = () => {
   return (
     <div>
       <TabBar />
-      {/* <Breadcrumbs breadcrumbs={breadcrumbsData} /> */}
+    
 
       <Showroom
         categoryName="Hot Drinks"

@@ -1,29 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #eed59c;
-}
-
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --background: #1E1A17;      /* Dark Coffee Brown */
+  --foreground: #F3ECE7;      /* Creamy White */
+  --accent: #D4A373;          /* Caramel Tan */
+  --hover: #A47148;           /* Deep Mocha */
+  --link: #ECD6C0;            /* Soft Latte */
   --font-sans: var(--font-nickysans);
+  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #eed59c;
-    --foreground: #ededed;
-  }
-}
+ 
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-nickysans), sans-serif;
+  font-family: var(--font-sans), sans-serif;
 }
 
+/* Optional utility if you want to use CSS vars in Tailwind classes */
+.bg-brand {
+  background-color: var(--background);
+}
+
+.text-brand {
+  color: var(--foreground);
+}
+
+a {
+  color: var(--link);
+}
+
+a:hover {
+  color: var(--hover);
+}

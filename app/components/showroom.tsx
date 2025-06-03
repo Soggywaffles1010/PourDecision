@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
 import GlassButton from './thbutton';
 import ProductCard from './card';
@@ -33,16 +34,16 @@ const Showroom: React.FC<ShowroomProps> = ({
   products,
   gridClassName,
 }) => {
-  const [maxCards, setMaxCards] = useState(1); // default to 1 for small screens
+  const [maxCards, setMaxCards] = useState(1);
 
   useEffect(() => {
     const updateCardLimit = () => {
       if (window.innerWidth >= 1024) {
-        setMaxCards(4); // large
+        setMaxCards(4);
       } else if (window.innerWidth >= 768) {
-        setMaxCards(3); // medium
+        setMaxCards(3);
       } else {
-        setMaxCards(1); // small
+        setMaxCards(1);
       }
     };
 
@@ -52,20 +53,29 @@ const Showroom: React.FC<ShowroomProps> = ({
   }, []);
 
   return (
-    <div className="mx-[50px] my-6 overflow-hidden">
-      <div className="flex-row flex justify-between gap-5 mb-4 ">
-        <div className="text-xl font-semibold text-yellow-900 ">
-          {categoryName} ({totalCategories})
+    <div className="px-4 sm:px-6 lg:px-12 py-8 overflow-hidden bg-background/5 rounded-2xl">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div className="font-nickysans text-xl sm:text-2xl font-semibold text-foreground">
+          {categoryName} <span className="text-accent">({totalCategories})</span>
         </div>
         <GlassButton
           text="View More"
-          fill="rgba(255, 255, 255, 0)"
-          stroke="rgba(255, 255, 255, 0)"
+          fill="transparent"
+          stroke="transparent"
           fontSize="0.9rem"
           fontWeight="400"
         />
       </div>
 
+      {/* Category Description (Optional) */}
+      {categoryDescription && (
+        <p className="text-sm text-foreground/60 mb-4 font-light max-w-2xl">
+          {categoryDescription}
+        </p>
+      )}
+
+      {/* Product Grid */}
       <div className={gridClassName || 'grid gap-5 grid-cols-1 md:grid-cols-3 lg:grid-cols-4'}>
         {products.slice(0, maxCards).map((product) => (
           <ProductCard

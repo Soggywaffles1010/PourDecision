@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { RiDrinksFill, RiDrinks2Line } from 'react-icons/ri';
@@ -28,16 +29,20 @@ const TabBar: React.FC = () => {
   };
 
   return (
-    <div className="w-full overflow-x-auto">
-      <div className="flex justify-center gap-4 sm:gap-6 px-4 sm:px-10 py-4">
+    <div className="w-full overflow-x-auto py-4 bg-background/5 rounded-xl">
+      <div className="flex justify-center gap-4 sm:gap-6 px-4 sm:px-10">
         {tabs.map((tab) => (
           <div
             key={tab.id}
             onClick={() => handleTabClick(tab)}
             className={`flex flex-col items-center cursor-pointer 
-              transition-all duration-300 ease-in-out px-3 py-2 
-              ${activeTab === tab.id ? 'text-yellow-900 bg-white/20 backdrop-blur-md rounded-xl' : 'text-yellow-700'}
-              hover:bg-white/20 hover:backdrop-blur-md hover:rounded-xl
+              transition-all duration-300 ease-in-out px-3 py-2 font-nickysans
+              ${
+                activeTab === tab.id
+                  ? 'text-accent bg-white/10 backdrop-blur-md rounded-xl'
+                  : 'text-foreground/60 hover:text-accent'
+              }
+              hover:bg-white/10 hover:backdrop-blur-md hover:rounded-xl
             `}
           >
             <div className="text-xl sm:text-2xl leading-none">{tab.icon}</div>
