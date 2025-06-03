@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import GlassButton from './thbutton';
 import ProductCard from './card';
 
@@ -35,6 +36,7 @@ const Showroom: React.FC<ShowroomProps> = ({
   gridClassName,
 }) => {
   const [maxCards, setMaxCards] = useState(1);
+  const router = useRouter();
 
   useEffect(() => {
     const updateCardLimit = () => {
@@ -52,6 +54,18 @@ const Showroom: React.FC<ShowroomProps> = ({
     return () => window.removeEventListener('resize', updateCardLimit);
   }, []);
 
+     const handleViewMoreClick = () => {
+  const words = categoryName.trim().split(' ');
+  const camelCase = words
+    .map((word, i) =>
+      i === 0
+        ? word.charAt(0).toLowerCase() + word.slice(1)
+        : word.charAt(0).toUpperCase() + word.slice(1)
+    )
+    .join('');
+  router.push(`/category/${camelCase}`);
+};
+
   return (
     <div className="px-4 sm:px-6 lg:px-12 py-8 overflow-hidden bg-background/5 rounded-2xl">
       {/* Header */}
@@ -62,13 +76,15 @@ const Showroom: React.FC<ShowroomProps> = ({
         <GlassButton
           text="View More"
           fill="transparent"
-          stroke="transparent"
+           
           fontSize="0.9rem"
           fontWeight="400"
+          onClick={handleViewMoreClick}
+          className='border-0'
         />
       </div>
 
-      {/* Category Description (Optional) */}
+      {/* Category Description */}
       {categoryDescription && (
         <p className="text-sm text-foreground/60 mb-4 font-light max-w-2xl">
           {categoryDescription}

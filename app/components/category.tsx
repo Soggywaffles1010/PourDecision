@@ -17,7 +17,6 @@ const Category = () => {
     <div>
       <TabBar />
     
-
       <Showroom
         categoryName="Hot Drinks"
         totalCategories={coffeeData.hotDrinks.length}
@@ -41,12 +40,21 @@ const Category = () => {
         categoryDescription="Delicious cold and blended coffee beverages."
         products={coffeeData.frappe}
       />
-          <Showroom 
+
+      <Showroom 
         categoryName="Soda"
         totalCategories={coffeeData.soda.length}
         categoryImage="/images/6.png"
         categoryDescription="Delicious cold and blended coffee beverages."
         products={coffeeData.soda}
+      />
+
+      <Showroom 
+        categoryName="Pastries"
+        totalCategories={coffeeData.pastries.length}
+        categoryImage="/images/pastry.png" // replace with your actual pastry image path
+        categoryDescription="Freshly baked pastries to pair with your coffee."
+        products={coffeeData.pastries}
       />
     </div>
   );

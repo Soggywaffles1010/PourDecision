@@ -9,6 +9,7 @@ const categories = [
   { label: 'Cold Drinks', key: 'coldDrinks' },
   { label: 'Frappe', key: 'frappe' },
   { label: 'Soda', key: 'soda' },
+  { label: 'Pastries', key: 'pastries' },  // Added Pastries category here
 ];
 
 const descriptions: Record<string, string> = {
@@ -16,6 +17,7 @@ const descriptions: Record<string, string> = {
   coldDrinks: 'Chilled beverages perfect for a hot afternoon.',
   frappe: 'Creamy, blended, and irresistibly indulgent treats.',
   soda: 'Sparkling and refreshing with a fizzy kick.',
+  pastries: 'Freshly baked delights to satisfy your sweet tooth.',  // Added description for pastries
 };
 
 type CategoryKey = keyof typeof coffeeData;

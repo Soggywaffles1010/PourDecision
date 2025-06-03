@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-    --background: #1E1A17;      /* Dark Coffee Brown */
+    --background: #97501a;      /* Dark Coffee Brown */
   --foreground: #F3ECE7;      /* Creamy White */
   --accent: #D4A373;          /* Caramel Tan */
   --hover: #A47148;           /* Deep Mocha */

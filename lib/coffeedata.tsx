@@ -18,6 +18,7 @@ export const coffeeData: {
   coldDrinks: Product[];
   frappe: Product[];
   soda:Product[];
+  pastries: Product[];
 } = {
   hotDrinks: [
     {
@@ -90,7 +91,7 @@ export const coffeeData: {
     {
       id: '7',
       title: 'Matcha Latte',
-      media: '/images/12.png',
+      media: '/images/29.png',
       author: 'Earthy matcha with steamed milk for a zen experience.',
       price: '₱139',
       sales: 6,
@@ -101,7 +102,7 @@ export const coffeeData: {
     {
       id: '8',
       title: 'Hot Belagio',
-      media: '/images/13.png',
+      media: '/images/30.png',
       author: 'A rich European-style hot chocolate drink.',
       price: '₱129',
       sales: 11,
@@ -262,7 +263,7 @@ export const coffeeData: {
   {
     id: '22',
     title: 'Coffee Frappe (Classic)',
-    media: '/images/25.png',
+    media: '/images/31.png',
     author: 'Classic blended coffee, rich and smooth.',
     price: '₱129',
     sales: 15,
@@ -317,5 +318,64 @@ soda: [
     link2: '/checkout',
   },
 ],
+
+pastries: [
+    {
+      id: '27',
+      title: 'Brownies',
+      media: '/images/32.png',
+      author: 'Classic fudgy brownies, rich and chewy.',
+      price: '₱45',
+      sales: 22,
+      rating: 5,
+      link: '#',
+      link2: '/checkout',
+    },
+    {
+      id: '28',
+      title: 'Revel Bars',
+      media: '/images/33.png',
+      author: 'Chewy oat bars layered with rich chocolate.',
+      price: '₱45',
+      sales: 18,
+      rating: 4,
+      link: '#',
+      link2: '/checkout',
+    },
+    {
+      id: '29',
+      title: 'S’mores Cookies',
+      media: '/images/34.png',
+      author: 'Graham, chocolate, and marshmallow in one cookie.',
+      price: '₱50',
+      sales: 20,
+      rating: 5,
+      link: '#',
+      link2: '/checkout',
+    },
+    // {
+    //   id: '30',
+    //   title: 'Marbled Chocolate Cookies',
+    //   media: '/images/35.png',
+    //   author: 'A mix of white and dark chocolate swirls.',
+    //   price: '₱50',
+    //   sales: 17,
+    //   rating: 4,
+    //   link: '#',
+    //   link2: '/checkout',
+    // },
+    {
+      id: '31',
+      title: 'NYC Cookies',
+      media: '/images/35.png',
+      author: 'Thick, chunky cookies inspired by New York bakeries.',
+      price: '₱50',
+      sales: 25,
+      rating: 5,
+      link: '#',
+      link2: '/checkout',
+    },
+  ],
+
 
 };

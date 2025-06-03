@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { RiDrinksFill, RiDrinks2Line } from 'react-icons/ri';
 import { BiDrink, BiSolidDrink } from 'react-icons/bi';
+import { FaBreadSlice } from 'react-icons/fa';  // Import pastry-related icon
+import { BiCookie } from "react-icons/bi";
 
 type Tab = {
   id: string;
@@ -21,6 +23,7 @@ const TabBar: React.FC = () => {
     { id: 'Cold Drinks', icon: <RiDrinks2Line />, label: 'Cold Drinks', query: 'coldDrinks' },
     { id: 'Frappe', icon: <BiDrink />, label: 'Frappe', query: 'frappe' },
     { id: 'Soda', icon: <BiSolidDrink />, label: 'Soda', query: 'soda' },
+    { id: 'Pastries', icon: <BiCookie />, label: 'Pastries', query: 'pastries' },  // Added Pastries tab
   ];
 
   const handleTabClick = (tab: Tab) => {

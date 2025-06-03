@@ -60,7 +60,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="relative bg-background/10 backdrop-blur-md rounded-2xl p-4 flex flex-col hover:scale-105 transition-all duration-300 ease-in-out shadow-md"
+         className="relative bg-background/20 bg-yellow-100/10 backdrop-blur-md rounded-2xl p-4 flex flex-col hover:scale-105 transition-all duration-300 ease-in-out shadow-md"
+
       >
         {/* Rating and Icons */}
         <div className="flex justify-between items-start text-accent">
@@ -94,24 +95,30 @@ const ProductCard: React.FC<ProductCardProps> = ({
               className="w-full h-48 sm:h-52 md:h-56 object-cover rounded-xl mb-2"
             />
           ) : (
-            <div className="relative">
-              <Image
-                src={media}
-                alt={title}
-                width={500}
-                height={300}
-                className="w-full h-48 sm:h-52 md:h-56 object-cover rounded-xl mb-2"
-                style={{ width: '100%', height: 'auto' }}
-              />
-              {isHovered && (
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="absolute top-2 right-2 bg-black/30 text-white p-2 rounded-full hover:bg-white hover:text-background transition"
-                >
-                  <FiEye size={18} />
-                </button>
-              )}
-            </div>
+             <div className="relative">
+  <Image
+    src={media}
+    alt={title}
+    width={500}
+    height={300}
+    className="w-full h-48 sm:h-52 md:h-56 object-cover rounded-xl mb-2"
+    style={{ width: '100%', height: 'auto' }}
+  />
+  {isHovered && (
+    <button
+      onClick={() => setIsModalOpen(true)}
+      className="absolute top-2 right-2 bg-black/30 text-white p-2 rounded-full hover:bg-white hover:text-background transition"
+    >
+      <FiEye size={18} />
+    </button>
+  )}
+
+  {/* Disclaimer positioned just below the image */}
+  <p className="absolute left-0 w-full  text-center text-xs italic text-yellow-600 mt-1 top-[calc(87%+5px)]">
+    *Actual orders may look different from the images shown. We serve using standard coffee cups and Clear PET Cups.
+  </p>
+</div>
+
           )}
 
           {/* Title & Meta */}
@@ -119,6 +126,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             {title}
           </div>
           <div className="text-sm text-foreground/60 font-light">{author}</div>
+          
 
           {/* Price & Sales */}
           <div className="flex justify-between text-sm sm:text-base mt-2 font-nickysans">

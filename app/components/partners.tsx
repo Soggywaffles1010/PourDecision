@@ -4,13 +4,16 @@ import Image from 'next/image';
 import Marquee from 'react-fast-marquee';
 
 const partnerLogos = [
-  { src: '/logos/bpaii.png', alt: 'BPAII' },
-  { src: '/logos/partner1.png', alt: 'Partner 1' },
-  { src: '/logos/partner2.png', alt: 'Partner 2' },
-  { src: '/logos/partner3.png', alt: 'Partner 3' },
-  { src: '/logos/partner4.png', alt: 'Partner 4' },
-  { src: '/logos/partner5.png', alt: 'Partner 5' },
-  // Add more logos here...
+  { src: '/images/partners/6.png', alt: 'BPAII' },
+  { src: '/images/partners/7.png', alt: 'Partner 1' },
+  { src: '/images/partners/8.png', alt: 'Partner 2' },
+  { src: '/images/partners/9.png', alt: 'Partner 3' },
+  { src: '/images/partners/10.png', alt: 'Partner 4' },
+  { src: '/images/partners/11.png', alt: 'Partner 5' },
+  { src: '/images/partners/6.png', alt: 'BPAII' },
+  { src: '/images/partners/7.png', alt: 'Partner 1' },
+  { src: '/images/partners/8.png', alt: 'Partner 2' },
+  
 ];
 
 const PartnersLogosSection: React.FC = () => {
