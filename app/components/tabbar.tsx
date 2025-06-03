@@ -1,9 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { RiDrinksFill, RiDrinks2Line } from "react-icons/ri";
-import { BiDrink } from "react-icons/bi";
-import { BiSolidDrink } from "react-icons/bi";
+import { RiDrinksFill, RiDrinks2Line } from 'react-icons/ri';
+import { BiDrink, BiSolidDrink } from 'react-icons/bi';
 
 type Tab = {
   id: string;
@@ -25,25 +24,27 @@ const TabBar: React.FC = () => {
 
   const handleTabClick = (tab: Tab) => {
     setActiveTab(tab.id);
-    router.push(`/category/${tab.query}`); // 👈 navigates with query
+    router.push(`/category/${tab.query}`);
   };
 
   return (
-    <div className="flex justify-center space-x-[20px] px-[50px] py-4">
-      {tabs.map((tab) => (
-        <div
-          key={tab.id}
-          onClick={() => handleTabClick(tab)}
-          className={`flex flex-col items-center cursor-pointer transition-all duration-300 ease-in-out
-            ${activeTab === tab.id ? 'text-yellow-900' : 'text-yellow-700'}
-            hover:bg-white/20 hover:backdrop-blur-md hover:rounded-xl p-4 gap-2
-            ${activeTab === tab.id ? 'bg-white/20 backdrop-blur-md rounded-xl' : ''}
-          `}
-        >
-          <div className="text-3xl">{tab.icon}</div>
-          <div className="text-sm">{tab.label}</div>
-        </div>
-      ))}
+    <div className="w-full overflow-x-auto">
+      <div className="flex justify-center gap-4 sm:gap-6 px-4 sm:px-10 py-4">
+        {tabs.map((tab) => (
+          <div
+            key={tab.id}
+            onClick={() => handleTabClick(tab)}
+            className={`flex flex-col items-center cursor-pointer 
+              transition-all duration-300 ease-in-out px-3 py-2 
+              ${activeTab === tab.id ? 'text-yellow-900 bg-white/20 backdrop-blur-md rounded-xl' : 'text-yellow-700'}
+              hover:bg-white/20 hover:backdrop-blur-md hover:rounded-xl
+            `}
+          >
+            <div className="text-xl sm:text-2xl leading-none">{tab.icon}</div>
+            <div className="text-[10px] sm:text-sm mt-1 leading-none">{tab.label}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

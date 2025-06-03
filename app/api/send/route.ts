@@ -13,17 +13,18 @@ export async function POST(request: Request) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'arusman1987@gmail.com',
-      pass: 'fllr emyg lsph xxoc', // App password
+    user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
   // Base mail options
   const mailOptions: any = {
     from: email,
-    to: 'arusman1987@gmail.com',
+    to: ['arusman1987@gmail.com', email],
     subject,
-    text: message,
+    // text: message,
+    html:message,
   };
 
   // Attach receipt if it exists

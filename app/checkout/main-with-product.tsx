@@ -5,6 +5,9 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiX } from 'react-icons/fi';
 import { coffeeData } from '@/lib/coffeedata';
+import { OrderStatusModal } from './components/orderModal';
+import { isVoucherValid } from '@/lib/voucher';
+import { generateEmailBody } from '@/lib/email';
 
 type Product = {
   id: string;
@@ -51,6 +54,7 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
   const [showModal, setShowModal] = useState(false);
   const [placeOrderVisible, setPlaceOrderVisible] = useState(false);
   const [orders, setOrders] = useState<{ product: Product; quantity: number }[]>([]);
+  const [orderStatus, setOrderStatus] = useState<'loading' | 'success' | 'error' | null>(null);
 
   const router = useRouter();
   const [showCategorySelector, setShowCategorySelector] = useState(false);
@@ -58,6 +62,11 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
   const productList = selectedCategory ? coffeeData[selectedCategory as keyof typeof coffeeData] || [] : [];
 
   const isFormDirty = Object.values(formData).some((val) => typeof val === 'string' && val.trim() !== '');
+
+  const [voucherInputVisible, setVoucherInputVisible] = useState(false);
+  const [voucherCode, setVoucherCode] = useState('');
+  const [isVoucherApplied, setIsVoucherApplied] = useState(false);
+  const [voucherError, setVoucherError] = useState('');
 
   // Add initial product to cart
   useEffect(() => {
@@ -119,32 +128,44 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
     });
   };
 
+  const baseTotal = orders.reduce(
+    (sum, o) => sum + parseFloat(o.product.price.replace(/[^\d.]/g, '')) * o.quantity,
+    0
+  );
+  const discount = isVoucherApplied ? 10 : 0;
+  const grandTotal = baseTotal - discount;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('Placing order...');
+    setOrderStatus('loading');
 
     const formDataToSend = new FormData();
     formDataToSend.append('name', formData.name);
     formDataToSend.append('email', formData.email || 'arusman1987@gmail.com');
     formDataToSend.append('subject', 'Customer Order');
 
-    const grandTotal = orders.reduce(
-      (sum, o) => sum + parseFloat(o.product.price.replace(/[^\d.]/g, '')) * o.quantity,
-      0
-    );
 
-    formDataToSend.append('message', `
-      Name: ${formData.name}
-      Location: ${formData.location}
-      Phone: ${formData.phone}
-      Notes: ${formData.notes}
-      Payment Method: ${formData.paymentMethod}
+//     formDataToSend.append('message', `
+// Name: ${formData.name}
+// Location: ${formData.location}
+// Phone: ${formData.phone}
+// Notes: ${formData.notes}
+// Payment Method: ${formData.paymentMethod}
+// Order Details:
+// ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.product.price.replace(/[^\d.]/g, '')) * o.quantity).toFixed(2)}`).join('\n')}
 
-      Order Details:
-${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.product.price.replace(/[^\d.]/g, '')) * o.quantity).toFixed(2)}`).join('\n')}
+// Grand Total: ₱${grandTotal.toFixed(2)}${isVoucherApplied ? ` (Voucher "${voucherCode}" applied)` : ''}
 
-      Grand Total: ₱${grandTotal.toFixed(2)}
-    `);
+//     `);
+
+
+        formDataToSend.append('message', generateEmailBody(
+  formData,
+  orders,
+  grandTotal,
+  isVoucherApplied,
+  voucherCode
+));
 
     if (formData.paymentMethod === 'GCash' && formData.receipt instanceof File) {
       formDataToSend.append('receipt', formData.receipt);
@@ -156,10 +177,13 @@ ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.prod
     });
 
     if (res.ok) {
-      setStatus('Order placed!');
-      setTimeout(() => router.push('/'), 1500);
+      setOrderStatus('success');
+      setTimeout(() => {
+        setOrderStatus(null);
+        router.push('/');
+      }, 1500);
     } else {
-      setStatus('Failed to place order.');
+      setOrderStatus('error');
     }
   };
 
@@ -174,7 +198,7 @@ ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.prod
         {/* Form Section */}
         <form onSubmit={handleSubmit} className="space-y-4 text-gray-600">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold">Shipping Information</h2>
+            <h2 className="text-2xl font-semibold">Delivery Information</h2>
             <button onClick={handleExitClick} className="text-gray-600 hover:text-red-500 text-xl"><FiX /></button>
           </div>
 
@@ -192,6 +216,56 @@ ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.prod
             </div>
           </div>
 
+
+
+
+          {/* Voucher Code */}
+<div className="mt-4">
+  {!voucherInputVisible ? (
+    <button
+      type="button"
+      className="text-indigo-600 hover:underline"
+      onClick={() => setVoucherInputVisible(true)}
+    >
+      Do you have a voucher code?
+    </button>
+  ) : (
+    <div className="space-y-2">
+      <input
+        type="text"
+        placeholder="Enter voucher code"
+        value={voucherCode}
+        onChange={(e) => setVoucherCode(e.target.value)}
+        className={`w-full px-4 py-2 border rounded-lg ${voucherError ? 'border-red-500' : ''}`}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          if (isVoucherValid(voucherCode)) {
+            setIsVoucherApplied(true);
+            setVoucherError('');
+          } else {
+            setIsVoucherApplied(false);
+            setVoucherError('Voucher not valid');
+          }
+        }}
+        className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
+      >
+        Apply Voucher
+      </button>
+      {voucherError && <p className="text-red-500 text-sm">{voucherError}</p>}
+      {isVoucherApplied && (
+        <p className="text-green-600 text-sm">Voucher applied! You saved 10%.</p>
+      )}
+    </div>
+  )}
+</div>
+
+
+
+
+
+
           {formData.paymentMethod === 'GCash' && (
             <div className="mt-4 space-y-2">
               <img src="/images/2.png" alt="GCash QR" className="w-32 rounded border" />
@@ -206,11 +280,10 @@ ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.prod
             </div>
           )}
 
-          {placeOrderVisible && (
-            <button type="submit" className="w-full py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Place Order</button>
-          )}
+         
 
-          {status && <p className="text-sm text-gray-600 mt-2">{status}</p>}
+          {/* {status && <p className="text-sm text-gray-600 mt-2">{status}</p>} */}
+    
         </form>
 
         {/* Cart Section */}
@@ -227,7 +300,7 @@ ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.prod
                     <div>
                       <p className="font-semibold text-lg">{order.product.title}</p>
                       <p className="text-sm text-gray-500">{order.product.author}</p>
-                      <p className="text-sm mt-1">₱{order.product.price}</p>
+                      <p className="text-sm mt-1">{order.product.price}</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-2">
@@ -260,6 +333,13 @@ ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.prod
                   0
                 ).toFixed(2)}
               </div>
+              <div className="text-right font-semibold text-lg mt-4">
+  Grand Total: ₱{grandTotal.toFixed(2)}
+  {isVoucherApplied && (
+    <p className="text-sm text-green-600">Discount applied: -₱{discount.toFixed(2)}</p>
+  )}
+</div>
+
             </div>
           )}
 
@@ -296,7 +376,7 @@ ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.prod
                       <img src={product.media} alt={product.title} className="w-16 h-16 object-cover rounded" />
                       <div className="flex-1">
                         <p className="font-medium text-sm">{product.title}</p>
-                        <p className="text-sm text-gray-500">₱{product.price}</p>
+                        <p className="text-sm text-gray-500">{product.price}</p>
                       </div>
                       <button
                         onClick={() => addProductToCart(product)}
@@ -307,10 +387,20 @@ ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.prod
                     </div>
                   ))}
                 </div>
+            
+          
               </div>
             )}
+                 <form onSubmit={handleSubmit} className="space-y-4 mt-3 text-gray-600">
+                
+                            {placeOrderVisible && (
+            <button type="submit" className="w-full py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Place Order</button>
+          )}
+                 </form>
           </div>
+        
         </div>
+         
       </div>
 
       {showModal && (
@@ -319,6 +409,13 @@ ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.prod
           onCancel={() => setShowModal(false)}
         />
       )}
+      {orderStatus && (
+  <OrderStatusModal
+    status={orderStatus}
+    
+  />
+)}
+
     </div>
   );
 };

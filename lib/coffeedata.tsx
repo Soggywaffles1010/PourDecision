@@ -113,7 +113,7 @@ export const coffeeData: {
 
   coldDrinks: [
   {
-    id: '1',
+    id: '9',
     title: 'Americano',
     media: '/images/12.png',
     author: 'Strong and bold, served cold for a refreshing kick.',
@@ -124,7 +124,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '2',
+    id: '10',
     title: 'Mocha Latte',
     media: '/images/13.png',
     author: 'Smooth blend of espresso, chocolate, and milk.',
@@ -135,7 +135,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '3',
+    id: '11',
     title: 'Spanish Latte',
     media: '/images/14.png',
     author: 'A creamy and sweet latte with a Spanish twist.',
@@ -146,7 +146,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '4',
+    id: '12',
     title: 'Matcha Caramel',
     media: '/images/15.png',
     author: 'Earthy matcha meets sweet, rich caramel.',
@@ -157,7 +157,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '5',
+    id: '13',
     title: 'Caramel Macchiato',
     media: '/images/16.png',
     author: 'Creamy layers of espresso and caramel.',
@@ -168,7 +168,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '6',
+    id: '14',
     title: 'Strawberry Matcha',
     media: '/images/17.png',
     author: 'Fresh strawberries and smooth matcha fusion.',
@@ -183,7 +183,7 @@ export const coffeeData: {
 
  frappe: [
   {
-    id: '1',
+    id: '15',
     title: 'Mocha Frappe',
     media: '/images/18.png',
     author: 'Chocolatey and icy mocha goodness in every sip.',
@@ -194,7 +194,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '2',
+    id: '16',
     title: 'Matcha Frappe',
     media: '/images/19.png',
     author: 'Icy green tea delight, creamy and energizing.',
@@ -205,7 +205,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '3',
+    id: '17',
     title: 'Mocha Crumble Frappe',
     media: '/images/20.png',
     author: 'Blended mocha with crunchy chocolate crumbles.',
@@ -216,7 +216,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '4',
+    id: '18',
     title: 'Cookies and Cream',
     media: '/images/21.png',
     author: 'Classic cookies blended into creamy perfection.',
@@ -227,7 +227,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '5',
+    id: '19',
     title: 'Double Chocolate',
     media: '/images/22.png',
     author: 'Chocolate overload with double the sweetness.',
@@ -238,7 +238,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '6',
+    id: '20',
     title: 'Salted Caramel',
     media: '/images/23.png',
     author: 'Sweet caramel with a pinch of sea salt.',
@@ -249,7 +249,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '7',
+    id: '21',
     title: 'Strawberry Frappe',
     media: '/images/24.png',
     author: 'Creamy strawberry treat, chilled to perfection.',
@@ -260,7 +260,7 @@ export const coffeeData: {
     link2: '/checkout',
   },
   {
-    id: '8',
+    id: '22',
     title: 'Coffee Frappe (Classic)',
     media: '/images/25.png',
     author: 'Classic blended coffee, rich and smooth.',
@@ -273,7 +273,7 @@ export const coffeeData: {
 ],
 soda: [
   {
-    id: '1',
+    id: '23',
     title: 'Passion Fruit Soda',
     media: '/images/26.png',
     author: 'Tropical and zesty, perfect for a hot day.',
@@ -284,7 +284,7 @@ soda: [
     link2: '/checkout',
   },
   {
-    id: '2',
+    id: '24',
     title: 'Strawberry Soda',
     media: '/images/27.png',
     author: 'Sweet strawberry fizz with a cool kick.',
@@ -295,7 +295,7 @@ soda: [
     link2: '/checkout',
   },
   {
-    id: '3',
+    id: '25',
     title: 'Green Apple Soda',
     media: '/images/28.png',
     author: 'Crisp green apple flavor with sparkling fun.',
@@ -306,7 +306,7 @@ soda: [
     link2: '/checkout',
   },
   {
-    id: '4',
+    id: '26',
     title: 'Lychee Soda',
     media: '/images/29.png',
     author: 'Floral and refreshing with light lychee taste.',

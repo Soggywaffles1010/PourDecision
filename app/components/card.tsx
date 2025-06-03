@@ -11,6 +11,8 @@ import {
 import GlassButton from './thbutton';
 import React, { useRef, useState } from 'react';
 import Spline from '@splinetool/react-spline';
+import Image from 'next/image';
+
 
 type ProductCardProps = {
   id: string;
@@ -89,44 +91,50 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* Body */}
-        <div className="flex flex-col gap-2 mt-4 relative">
-          {isVideo ? (
-            <video
-              ref={videoRef}
-              src={media}
-              controls
-              muted
-              className="w-full h-48 object-cover rounded-xl mb-2"
-            />
-          ) : (
-            <div className="relative">
-              <img
-                src={media}
-                alt={title}
-                className="w-full h-full object-cover rounded-xl mb-2"
-              />
-              {isHovered && (
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="absolute top-2 right-2 bg-black/20 p-2 rounded-full text-white hover:bg-white/80 transition"
-                >
-                  <FiEye size={18} />
-                </button>
-              )}
-            </div>
-          )}
+       {/* Body */}
+<div className="flex flex-col gap-2 mt-4 relative">
+  {isVideo ? (
+    <video
+      ref={videoRef}
+      src={media}
+      controls
+      muted
+      className="w-full h-44 sm:h-48 md:h-52 object-cover object-center rounded-xl mb-2"
+    />
+  ) : (
+    <div className="relative">
+      <Image
+  src={media}
+  alt={title}
+  width={500} // or adjust as needed
+  height={300}
+  className="w-full h-44 sm:h-48 md:h-52 object-cover object-center rounded-xl mb-2"
+  style={{ width: '100%', height: 'auto' }}
+  priority={false}
+/>
 
-          {/* Title & Author */}
-          <div className="text-lg font-semibold text-yellow-900">{title}</div>
-          <div className="text-sm text-yellow-700/70">{author}</div>
+      {isHovered && (
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="absolute top-2 right-2 bg-black/20 p-2 rounded-full text-white hover:bg-white/80 transition"
+        >
+          <FiEye size={18} />
+        </button>
+      )}
+    </div>
+  )}
 
-          {/* Price & Sales */}
-          <div className="flex justify-between text-sm  mt-2">
-            <div className="text-xl text-yellow-900 font-extrabold">{price}</div>
-            <div className="text-yellow-700/70">Sales: {sales}</div>
-          </div>
-        </div>
+  {/* Title & Author */}
+  <div className="text-base sm:text-lg font-semibold text-yellow-900">{title}</div>
+  <div className="text-xs sm:text-sm text-yellow-700/70">{author}</div>
+
+  {/* Price & Sales */}
+  <div className="flex justify-between text-xs sm:text-sm mt-2">
+    <div className="text-lg sm:text-xl text-yellow-900 font-extrabold">{price}</div>
+    <div className="text-yellow-700/70">Sales: {sales}</div>
+  </div>
+</div>
+
 
         {/* Tail Buttons */}
         <div className="flex gap-4 mt-4">
