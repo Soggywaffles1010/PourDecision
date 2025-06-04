@@ -29,7 +29,7 @@ const Header = () => {
 <div className="w-16 h-16 md:w-24 md:h-24 overflow-hidden rounded-full mx-auto md:mx-0">
   <Link href="/" className="block w-full h-full">
     <Image
-      src="/images/logo.png"
+      src="/images/13(1).png"
       alt="Logo"
       width={90}
       height={64}

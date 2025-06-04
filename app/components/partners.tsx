@@ -4,15 +4,25 @@ import Image from 'next/image';
 import Marquee from 'react-fast-marquee';
 
 const partnerLogos = [
-  { src: '/images/partners/6.png', alt: 'BPAII' },
-  { src: '/images/partners/7.png', alt: 'Partner 1' },
-  { src: '/images/partners/8.png', alt: 'Partner 2' },
-  { src: '/images/partners/9.png', alt: 'Partner 3' },
-  { src: '/images/partners/10.png', alt: 'Partner 4' },
-  { src: '/images/partners/11.png', alt: 'Partner 5' },
-  { src: '/images/partners/6.png', alt: 'BPAII' },
-  { src: '/images/partners/7.png', alt: 'Partner 1' },
-  { src: '/images/partners/8.png', alt: 'Partner 2' },
+  // { src: '/images/partners/6.png', alt: 'BPAII' },
+  // { src: '/images/partners/7.png', alt: 'Partner 1' },
+  // { src: '/images/partners/8.png', alt: 'Partner 2' },
+  // { src: '/images/partners/9.png', alt: 'Partner 3' },
+  // { src: '/images/partners/10.png', alt: 'Partner 4' },
+  // { src: '/images/partners/11.png', alt: 'Partner 5' },
+  // { src: '/images/partners/6.png', alt: 'BPAII' },
+  // { src: '/images/partners/7.png', alt: 'Partner 1' },
+  // { src: '/images/partners/8.png', alt: 'Partner 2' },
+
+  { src: '/images/12(1).png', alt: 'BPAII' },
+  { src: '/images/12(1).png', alt: 'Partner 1' },
+  { src: '/images/12(1).png', alt: 'Partner 2' },
+  { src: '/images/12(1).png', alt: 'Partner 3' },
+  { src: '/images/12(1).png', alt: 'Partner 4' },
+  { src: '/images/12(1).png', alt: 'Partner 5' },
+  { src: '/images/12(1).png', alt: 'BPAII' },
+  { src: '/images/12(1).png', alt: 'Partner 1' },
+  { src: '/images/12(1).png', alt: 'Partner 2' },
   
 ];
 

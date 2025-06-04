@@ -23,6 +23,7 @@ type ProductCardProps = {
   link: string;
   link2: string;
   splineLink?: string;
+  badge?:boolean
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -36,6 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   link,
   link2,
   splineLink,
+  badge,
 }) => {
   const isVideo = /\.(mp4|webm|ogg)$/i.test(media);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -95,7 +97,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               className="w-full h-48 sm:h-52 md:h-56 object-cover rounded-xl mb-2"
             />
           ) : (
-             <div className="relative">
+                     <div className="relative">
   <Image
     src={media}
     alt={title}
@@ -104,6 +106,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
     className="w-full h-48 sm:h-52 md:h-56 object-cover rounded-xl mb-2"
     style={{ width: '100%', height: 'auto' }}
   />
+
+  {/* ✅ Show badge only when badge prop is true */}
+  {badge && (
+    <div className=" absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-md shadow-md uppercase font-bold z-10">
+      SOLD OUT
+    </div>
+  )}
+
   {isHovered && (
     <button
       onClick={() => setIsModalOpen(true)}
@@ -113,11 +123,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
     </button>
   )}
 
-  {/* Disclaimer positioned just below the image */}
-  <p className="absolute left-0 w-full  text-center text-xs italic text-yellow-600 mt-1 top-[calc(87%+5px)]">
+  <p className="absolute left-0 w-full text-center text-xs italic text-yellow-600 mt-1 top-[calc(87%+5px)]">
     *Actual orders may look different from the images shown. We serve using standard coffee cups and Clear PET Cups.
   </p>
 </div>
+
 
           )}
 

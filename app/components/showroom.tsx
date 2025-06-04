@@ -16,6 +16,7 @@ type Product = {
   link: string;
   link2: string;
   splineLink?: string;
+  badge?:boolean;
 };
 
 type ShowroomProps = {
@@ -106,6 +107,7 @@ const Showroom: React.FC<ShowroomProps> = ({
             link={product.link}
             link2={product.link2}
             splineLink={product.splineLink}
+            badge={product.badge} 
           />
         ))}
       </div>

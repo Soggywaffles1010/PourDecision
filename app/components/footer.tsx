@@ -22,7 +22,7 @@ const Footer = () => {
           <div className="w-16 h-16 md:w-24 md:h-24 overflow-hidden rounded-full mb-3">
             <Link href="/" className="block w-full h-full">
               <Image
-                src="/images/logo.png"
+                src="/images/13(1).png"
                 alt="Logo"
                 width={96}
                 height={96}

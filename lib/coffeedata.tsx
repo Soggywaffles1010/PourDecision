@@ -11,6 +11,7 @@ export type Product = {
   link: string;
   link2: string;
   splineLink?: string;
+  badge?:boolean;
 };
 
 export const coffeeData: {
@@ -24,13 +25,14 @@ export const coffeeData: {
     {
       id: '1',
       title: 'Americano',
-      media: '/images/6.png',
+      media: '/images/9.png',
       author: 'Strong and bold, perfect for a quick caffeine hit.',
       price: '₱89',
       sales: 12,
       rating: 4,
       link: 'https://elements.envato.com/photos/blanket',
       link2: '/Contact',
+      badge: true
     },
     {
       id: '2',
@@ -58,7 +60,7 @@ export const coffeeData: {
     {
       id: '4',
       title: 'Mocha Latte',
-      media: '/images/9.png',
+      media: '/images/6.png',
       author: 'A delicious mix of coffee and rich chocolate.',
       price: '₱129',
       sales: 15,
@@ -316,6 +318,7 @@ soda: [
     rating: 4,
     link: 'https://elements.envato.com/photos/blanket',
     link2: '/checkout',
+     
   },
 ],
 

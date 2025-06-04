@@ -1,4 +1,3 @@
-// app/checkout/main-with-product.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -68,7 +67,9 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
   const [isVoucherApplied, setIsVoucherApplied] = useState(false);
   const [voucherError, setVoucherError] = useState('');
 
-  // Add initial product to cart
+  const [missingFields, setMissingFields] = useState<string[]>([]);
+
+
   useEffect(() => {
     if (!initialProductId) return;
     const allProducts: Product[] = [
@@ -137,36 +138,30 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+     const requiredFields = ['name', 'location', 'phone', 'paymentMethod'];
+  if (formData.paymentMethod === 'GCash' && !formData.receipt) {
+    requiredFields.push('receipt');
+  }
+
+  const missing = requiredFields.filter((field) => {
+    if (field === 'receipt') return !(formData.receipt instanceof File);
+    return !(formData as any)[field] || (formData as any)[field].trim() === '';
+  });
+
+  if (missing.length > 0) {
+    setMissingFields(missing);
+    return;
+  }
+
+  setMissingFields([]);
+  setOrderStatus('loading');
     setOrderStatus('loading');
 
     const formDataToSend = new FormData();
     formDataToSend.append('name', formData.name);
     formDataToSend.append('email', formData.email || 'arusman1987@gmail.com');
     formDataToSend.append('subject', 'Customer Order');
-
-
-//     formDataToSend.append('message', `
-// Name: ${formData.name}
-// Location: ${formData.location}
-// Phone: ${formData.phone}
-// Notes: ${formData.notes}
-// Payment Method: ${formData.paymentMethod}
-// Order Details:
-// ${orders.map(o => `- ${o.product.title} x${o.quantity} = ₱${(parseFloat(o.product.price.replace(/[^\d.]/g, '')) * o.quantity).toFixed(2)}`).join('\n')}
-
-// Grand Total: ₱${grandTotal.toFixed(2)}${isVoucherApplied ? ` (Voucher "${voucherCode}" applied)` : ''}
-
-//     `);
-
-
-        formDataToSend.append('message', generateEmailBody(
-  formData,
-  orders,
-  grandTotal,
-  isVoucherApplied,
-  voucherCode
-));
-
+    formDataToSend.append('message', generateEmailBody(formData, orders, grandTotal, isVoucherApplied, voucherCode));
     if (formData.paymentMethod === 'GCash' && formData.receipt instanceof File) {
       formDataToSend.append('receipt', formData.receipt);
     }
@@ -195,98 +190,7 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
   return (
     <div className="min-h-screen flex flex-col items-center justify-center py-10 px-4">
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-lg mt-30">
-        {/* Form Section */}
-        <form onSubmit={handleSubmit} className="space-y-4 text-gray-600">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold">Delivery Information</h2>
-            <button onClick={handleExitClick} className="text-gray-600 hover:text-red-500 text-xl"><FiX /></button>
-          </div>
-
-          <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name of receiver" required className="w-full px-4 py-2 rounded-lg border" />
-          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email address" className="w-full px-4 py-2 rounded-lg border" />
-          <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="City / Address / Pin Location / Google maps" required className="w-full px-4 py-2 rounded-lg border" />
-          <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone number" required className="w-full px-4 py-2 rounded-lg border" />
-          <textarea name="notes" value={formData.notes} onChange={handleChange} placeholder="Additional Notes" rows={3} className="w-full px-4 py-2 rounded-lg border" />
-
-          <div>
-            <p className="mb-1 font-medium">Choose Payment Method:</p>
-            <div className="flex gap-4">
-              <button type="button" onClick={() => handlePaymentSelect('GCash')} className={`px-4 py-2 rounded-lg border ${formData.paymentMethod === 'GCash' ? 'bg-green-500 text-white' : ''}`}>GCash</button>
-              <button type="button" onClick={() => handlePaymentSelect('COD')} className={`px-4 py-2 rounded-lg border ${formData.paymentMethod === 'COD' ? 'bg-blue-500 text-white' : ''}`}>Cash on Delivery</button>
-            </div>
-          </div>
-
-
-
-
-          {/* Voucher Code */}
-<div className="mt-4">
-  {!voucherInputVisible ? (
-    <button
-      type="button"
-      className="text-indigo-600 hover:underline"
-      onClick={() => setVoucherInputVisible(true)}
-    >
-      Do you have a voucher code?
-    </button>
-  ) : (
-    <div className="space-y-2">
-      <input
-        type="text"
-        placeholder="Enter voucher code"
-        value={voucherCode}
-        onChange={(e) => setVoucherCode(e.target.value)}
-        className={`w-full px-4 py-2 border rounded-lg ${voucherError ? 'border-red-500' : ''}`}
-      />
-      <button
-        type="button"
-        onClick={() => {
-          if (isVoucherValid(voucherCode)) {
-            setIsVoucherApplied(true);
-            setVoucherError('');
-          } else {
-            setIsVoucherApplied(false);
-            setVoucherError('Voucher not valid');
-          }
-        }}
-        className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
-      >
-        Apply Voucher
-      </button>
-      {voucherError && <p className="text-red-500 text-sm">{voucherError}</p>}
-      {isVoucherApplied && (
-        <p className="text-green-600 text-sm">Voucher applied! You saved 10%.</p>
-      )}
-    </div>
-  )}
-</div>
-
-
-
-
-
-
-          {formData.paymentMethod === 'GCash' && (
-            <div className="mt-4 space-y-2">
-              <img src="/images/2.png" alt="GCash QR" className="w-32 rounded border" />
-              <p><strong>Name:</strong> Vanessa Tandoy</p>
-              <p><strong>Number:</strong> 09451270867</p>
-
-              <label className="mt-2 cursor-pointer inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
-                Upload Receipt
-                <input type="file" onChange={handleFileChange} className="hidden" />
-              </label>
-              {formData.receipt && <p className="text-sm text-gray-600 mt-1">{formData.receipt.name}</p>}
-            </div>
-          )}
-
-         
-
-          {/* {status && <p className="text-sm text-gray-600 mt-2">{status}</p>} */}
-    
-        </form>
-
-        {/* Cart Section */}
+        {/* Cart Section - now on the left */}
         <div className="bg-gray-50 p-6 rounded-lg border text-gray-600">
           <h3 className="text-lg font-semibold mb-4">Review your cart</h3>
           {orders.length === 0 ? (
@@ -327,19 +231,11 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
                 </div>
               ))}
               <div className="text-right font-semibold text-lg mt-4">
-                Grand Total: ₱
-                {orders.reduce(
-                  (sum, o) => sum + parseFloat(o.product.price.replace(/[^\d.]/g, '')) * o.quantity,
-                  0
-                ).toFixed(2)}
+                Grand Total: ₱{grandTotal.toFixed(2)}
+                {isVoucherApplied && (
+                  <p className="text-sm text-green-600">Discount applied: -₱{discount.toFixed(2)}</p>
+                )}
               </div>
-              <div className="text-right font-semibold text-lg mt-4">
-  Grand Total: ₱{grandTotal.toFixed(2)}
-  {isVoucherApplied && (
-    <p className="text-sm text-green-600">Discount applied: -₱{discount.toFixed(2)}</p>
-  )}
-</div>
-
             </div>
           )}
 
@@ -358,49 +254,147 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className={`px-3 py-1 border rounded ${
-                        selectedCategory === category ? 'bg-indigo-600 text-white' : 'bg-white text-gray-800'
-                      }`}
+                      className={`px-3 py-1 border rounded ${selectedCategory === category ? 'bg-indigo-600 text-white' : 'bg-white text-gray-800'}`}
                     >
                       {category}
                     </button>
                   ))}
                 </div>
-
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto">
                   {productList.map((product) => (
-                    <div
-                      key={product.id}
-                      className="flex items-center gap-4 p-3 border rounded bg-white hover:shadow"
-                    >
+                    <div key={product.id} className="flex items-center gap-4 p-3 border rounded bg-white hover:shadow">
                       <img src={product.media} alt={product.title} className="w-16 h-16 object-cover rounded" />
                       <div className="flex-1">
                         <p className="font-medium text-sm">{product.title}</p>
                         <p className="text-sm text-gray-500">{product.price}</p>
                       </div>
-                      <button
-                        onClick={() => addProductToCart(product)}
-                        className="px-2 py-1 bg-indigo-500 text-white text-sm rounded hover:bg-indigo-600"
-                      >
-                        Add
-                      </button>
+                      {product.badge ? (
+                        <span className="px-2 py-1 bg-red-100 text-red-600 text-sm rounded font-semibold cursor-not-allowed">
+                          Sold Out
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => addProductToCart(product)}
+                          className="px-2 py-1 bg-indigo-500 text-white text-sm rounded hover:bg-indigo-600"
+                        >
+                          Add
+                        </button>
+                      )}
                     </div>
                   ))}
                 </div>
-            
-          
               </div>
             )}
-                 <form onSubmit={handleSubmit} className="space-y-4 mt-3 text-gray-600">
-                
-                            {placeOrderVisible && (
-            <button type="submit" className="w-full py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Place Order</button>
-          )}
-                 </form>
+           
           </div>
-        
         </div>
-         
+
+        {/* Delivery Form - now on the right */}
+        <form onSubmit={handleSubmit} className="space-y-4 text-gray-600">
+          <div className="flex justify-between items-center">
+            <h2 className="text-2xl font-semibold">Delivery Information</h2>
+            <button onClick={handleExitClick} className="text-gray-600 hover:text-red-500 text-xl"><FiX /></button>
+          </div>
+
+          <input
+  type="text"
+  name="name"
+  value={formData.name}
+  onChange={handleChange}
+  placeholder={missingFields.includes('name') ? 'Please enter your name' : 'Name of receiver'}
+  className={`w-full px-4 py-2 rounded-lg border ${missingFields.includes('name') ? 'border-red-500' : ''}`}
+/>
+          
+          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={missingFields.includes('email') ? 'Please enter your email' : 'Please enter your email'}
+          className={`w-full px-4 py-2 rounded-lg border ${missingFields.includes('name') ? 'border-red-500' : ''}`} />
+
+          <input type="text" name="location" value={formData.location} onChange={handleChange} required  placeholder={missingFields.includes('location') ? 'Please enter your location' : 'City / Address / Pin Location / Google maps'}
+          className={`w-full px-4 py-2 rounded-lg border ${missingFields.includes('location') ? 'border-red-500' : ''}`} />
+          <input type="text" name="phone" value={formData.phone} onChange={handleChange}   required placeholder={missingFields.includes('phone') ? 'Please enter your phone number' : 'Phone number'}
+          className={`w-full px-4 py-2 rounded-lg border ${missingFields.includes('phone') ? 'border-red-500' : ''}`}
+          />
+          <textarea name="notes" value={formData.notes} onChange={handleChange} placeholder="Additional Notes" rows={3} className="w-full px-4 py-2 rounded-lg border" />
+
+          <div>
+            <p className="mb-1 font-medium">Choose Payment Method:</p>
+             <div className="flex gap-4">
+  <button
+    type="button"
+    onClick={() => handlePaymentSelect('GCash')}
+    className={`px-4 py-2 rounded-lg border ${formData.paymentMethod === 'GCash' ? 'bg-green-500 text-white' : ''} ${missingFields.includes('paymentMethod') ? 'border-red-500' : ''}`}
+  >
+    GCash
+  </button>
+  <button
+    type="button"
+    onClick={() => handlePaymentSelect('COD')}
+    className={`px-4 py-2 rounded-lg border ${formData.paymentMethod === 'COD' ? 'bg-blue-500 text-white' : ''} ${missingFields.includes('paymentMethod') ? 'border-red-500' : ''}`}
+  >
+    Cash on Delivery
+  </button>
+</div>
+
+          </div>
+
+          <div className="mt-4">
+            {!voucherInputVisible ? (
+              <button type="button" className="text-indigo-600 hover:underline" onClick={() => setVoucherInputVisible(true)}>
+                Do you have a voucher code?
+              </button>
+            ) : (
+              <div className="space-y-2">
+                <input
+                  type="text"
+                  placeholder="Enter voucher code"
+                  value={voucherCode}
+                  onChange={(e) => setVoucherCode(e.target.value)}
+                  className={`w-full px-4 py-2 border rounded-lg ${voucherError ? 'border-red-500' : ''}`}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isVoucherValid(voucherCode)) {
+                      setIsVoucherApplied(true);
+                      setVoucherError('');
+                    } else {
+                      setIsVoucherApplied(false);
+                      setVoucherError('Voucher not valid');
+                    }
+                  }}
+                  className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
+                >
+                  Apply Voucher
+                </button>
+                {voucherError && <p className="text-red-500 text-sm">{voucherError}</p>}
+                {isVoucherApplied && (
+                  <p className="text-green-600 text-sm">Voucher applied! You saved  ₱10 OFF.</p>
+                )}
+              </div>
+            )}
+          </div>
+
+         {formData.paymentMethod === 'GCash' && (
+  <div className="mt-4 space-y-2">
+    <img src="/images/2.png" alt="GCash QR" className="w-32 rounded border" />
+    <p><strong>Name:</strong> Vanessa Tandoy</p>
+    <p><strong>Number:</strong> 09451270867</p>
+
+    <label className={`mt-2 cursor-pointer inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 ${missingFields.includes('receipt') ? 'border-2 border-red-500' : ''}`}>
+      Upload Receipt
+      <input type="file" onChange={handleFileChange} className="hidden" />
+    </label>
+    {formData.receipt && <p className="text-sm text-gray-600 mt-1">{formData.receipt.name}</p>}
+  </div>
+)}
+
+          
+           
+                  <button type="submit" className="w-full py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">
+  Place Order
+</button>
+
+             
+        </form>
       </div>
 
       {showModal && (
@@ -410,12 +404,8 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
         />
       )}
       {orderStatus && (
-  <OrderStatusModal
-    status={orderStatus}
-    
-  />
-)}
-
+        <OrderStatusModal status={orderStatus} />
+      )}
     </div>
   );
 };

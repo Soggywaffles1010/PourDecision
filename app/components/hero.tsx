@@ -30,15 +30,21 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mt-4 items-center sm:items-start justify-center px-24 sm:px-0">
           <a href="#category">
-            <GlassButton text="Get Started" icon={<FiPlay />} delay={4000} />
+            <GlassButton 
+            className='border-yellow-700 bg-none text-yellow-900 '
+            text="Get Started" 
+            icon={<FiPlay />} 
+            delay={4000} />
+
           </a>
           <a href="#category">
             <GlassButton
               text="Order Now"
               icon={<FiInfo />}
               fill="rgba(255, 255, 255, 0)"
-              stroke="rgba(255, 255, 255, 0.4)"
+              stroke=""
               delay={4000}
+              className='bg-yellow-700 border-none'
             />
           </a>
         </div>
