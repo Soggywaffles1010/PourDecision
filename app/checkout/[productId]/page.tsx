@@ -18,7 +18,8 @@ const CheckoutWithProductPage = async ({ params }: PageProps) => {
     ...coffeeData.hotDrinks, 
     ...coffeeData.coldDrinks, 
     ...coffeeData.frappe,
-    ...coffeeData.soda
+    ...coffeeData.soda,
+     ...coffeeData.pastries
   ];
   
   const product = allProducts.find(p => p.id === productId);

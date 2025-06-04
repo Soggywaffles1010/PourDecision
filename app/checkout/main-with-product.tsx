@@ -76,7 +76,8 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
       ...coffeeData.hotDrinks, 
       ...coffeeData.coldDrinks, 
       ...coffeeData.frappe,
-      ...coffeeData.soda
+      ...coffeeData.soda,
+      ...coffeeData.pastries,
     ];
     const found = allProducts.find((p) => p.id === initialProductId);
     if (found) {

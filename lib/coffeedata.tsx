@@ -311,14 +311,14 @@ soda: [
   {
     id: '26',
     title: 'Lychee Soda',
-    media: '/images/29.png',
+    media: '/images/26.png',
     author: 'Floral and refreshing with light lychee taste.',
     price: '₱79',
     sales: 6,
     rating: 4,
     link: 'https://elements.envato.com/photos/blanket',
     link2: '/checkout',
-     
+    badge:true,
   },
 ],
 
