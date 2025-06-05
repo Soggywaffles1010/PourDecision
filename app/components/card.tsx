@@ -11,6 +11,8 @@ import GlassButton from './thbutton';
 import React, { useRef, useState } from 'react';
 import Spline from '@splinetool/react-spline';
 import Image from 'next/image';
+import { useCartStore } from '@/store/cartStore';
+import { useRouter } from 'next/navigation'; // or next/router for older versions
 
 type ProductCardProps = {
   id: string;
@@ -48,6 +50,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
     setIsHovered(true);
     videoRef.current?.play();
   };
+
+  const router = useRouter();
+const addToCart = useCartStore((state) => state.addToCart);
 
   const handleMouseLeave = () => {
     setIsHovered(false);
@@ -148,11 +153,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
         {/* Action Buttons */}
         <div className="flex gap-4 mt-4">
           <GlassButton text="Like" icon={<FiHeart />} />
-          <GlassButton
-            text="Place Order"
-            icon={<FiDownload />}
-            link={`/checkout/${id}`}
-          />
+            <GlassButton
+  text="Place Order"
+  icon={<FiDownload />}
+  onClick={() => {
+    addToCart({ id, title, price, media });
+    router.push(`/checkout/${id}`);
+  }}
+/>
         </div>
       </div>
 

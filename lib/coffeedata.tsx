@@ -32,7 +32,7 @@ export const coffeeData: {
       rating: 4,
       link: 'https://elements.envato.com/photos/blanket',
       link2: '/Contact',
-      badge: true
+      
     },
     {
       id: '2',

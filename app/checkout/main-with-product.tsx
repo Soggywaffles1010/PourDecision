@@ -7,6 +7,7 @@ import { coffeeData } from '@/lib/coffeedata';
 import { OrderStatusModal } from './components/orderModal';
 import { isVoucherValid } from '@/lib/voucher';
 import { generateEmailBody } from '@/lib/email';
+import { useCartStore } from '@/store/cartStore';
 
 type Product = {
   id: string;
@@ -37,6 +38,8 @@ const ExitConfirmModal = ({ onConfirm, onCancel }: { onConfirm: () => void; onCa
     </div>
   </div>
 );
+
+
 
 const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProps) => {
   const [formData, setFormData] = useState({
@@ -69,6 +72,10 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
 
   const [missingFields, setMissingFields] = useState<string[]>([]);
 
+ const cart = useCartStore((state) => state.cart); 
+  const addToCart = useCartStore((state) => state.addToCart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+
 
   useEffect(() => {
     if (!initialProductId) return;
@@ -86,7 +93,7 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
         if (existing) {
           return prev.map(o => 
             o.product.id === found.id 
-              ? { ...o, quantity: o.quantity + 1 }
+              ? { ...o, quantity: o.quantity + 0 }
               : o
           );
         }
