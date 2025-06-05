@@ -14,11 +14,7 @@ const partnerLogos = [
   // { src: '/images/partners/7.png', alt: 'Partner 1' },
   // { src: '/images/partners/8.png', alt: 'Partner 2' },
 
-  { src: '/images/12(1).png', alt: 'BPAII' },
-  
-  { src: '/images/12(1).png', alt: 'BPAII' },
-  { src: '/images/12(1).png', alt: 'Partner 1' },
-  { src: '/images/12(1).png', alt: 'Partner 2' },
+   
   { src: '/images/partners/6.png', alt: 'BPAII' },
   { src: '/images/partners/11.png', alt: 'Partner 2' },
   { src: '/images/logo.png', alt: 'Partner 2' },
@@ -26,6 +22,7 @@ const partnerLogos = [
   { src: '/images/partners/crooks.jpeg', alt: 'Partner 2' },
   { src: '/images/partners/kb.jpeg', alt: 'Partner 2' },
   { src: '/images/partners/AV.png', alt: 'Partner 2' },
+  { src: '/images/partners/balutakay.jpg', alt: 'Partner 2' },
 
   
 ];
