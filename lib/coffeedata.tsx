@@ -24,7 +24,7 @@ export const coffeeData: {
   hotDrinks: [
     {
       id: '1',
-      title: 'Americano',
+      title: 'Hot Americano',
       media: '/images/9.png',
       author: 'Strong and bold, perfect for a quick caffeine hit.',
       price: '₱89',
@@ -36,7 +36,7 @@ export const coffeeData: {
     },
     {
       id: '2',
-      title: 'Cappuccino',
+      title: 'Hot Cappuccino',
       media: '/images/7.png',
       author: 'A classic blend of espresso, steamed milk, and foam.',
       price: '₱129',
@@ -48,7 +48,7 @@ export const coffeeData: {
     },
     {
       id: '3',
-      title: 'Spanish Latte',
+      title: 'Hot Spanish Latte',
       media: '/images/8.png',
       author: 'Sweetened milk and espresso for a smooth, rich taste.',
       price: '₱129',
@@ -59,7 +59,7 @@ export const coffeeData: {
     },
     {
       id: '4',
-      title: 'Mocha Latte',
+      title: 'Hot Mocha Latte',
       media: '/images/6.png',
       author: 'A delicious mix of coffee and rich chocolate.',
       price: '₱129',
@@ -70,7 +70,7 @@ export const coffeeData: {
     },
     {
       id: '5',
-      title: 'Caramel Macchiato',
+      title: 'Hot Caramel Macchiato',
       media: '/images/10.png',
       author: 'Espresso with vanilla, milk, and a caramel drizzle.',
       price: '₱139',
@@ -81,7 +81,7 @@ export const coffeeData: {
     },
     {
       id: '6',
-      title: 'Cafe Latte',
+      title: 'Hot Cafe Latte',
       media: '/images/11.png',
       author: 'Smooth and creamy with a mellow espresso base.',
       price: '₱129',
@@ -92,7 +92,7 @@ export const coffeeData: {
     },
     {
       id: '7',
-      title: 'Matcha Latte',
+      title: 'Hot Matcha Latte',
       media: '/images/29.png',
       author: 'Earthy matcha with steamed milk for a zen experience.',
       price: '₱139',
@@ -117,7 +117,7 @@ export const coffeeData: {
   coldDrinks: [
   {
     id: '9',
-    title: 'Americano',
+    title: 'Cold Americano',
     media: '/images/12.png',
     author: 'Strong and bold, served cold for a refreshing kick.',
     price: '₱89',
@@ -128,7 +128,7 @@ export const coffeeData: {
   },
   {
     id: '10',
-    title: 'Mocha Latte',
+    title: 'Cold Mocha Latte',
     media: '/images/13.png',
     author: 'Smooth blend of espresso, chocolate, and milk.',
     price: '₱129',
@@ -139,7 +139,7 @@ export const coffeeData: {
   },
   {
     id: '11',
-    title: 'Spanish Latte',
+    title: 'Cold Spanish Latte',
     media: '/images/14.png',
     author: 'A creamy and sweet latte with a Spanish twist.',
     price: '₱139',
@@ -150,7 +150,7 @@ export const coffeeData: {
   },
   {
     id: '12',
-    title: 'Matcha Caramel',
+    title: 'Cold Matcha Caramel',
     media: '/images/15.png',
     author: 'Earthy matcha meets sweet, rich caramel.',
     price: '₱139',
@@ -161,7 +161,7 @@ export const coffeeData: {
   },
   {
     id: '13',
-    title: 'Caramel Macchiato',
+    title: 'Cold Caramel Macchiato',
     media: '/images/16.png',
     author: 'Creamy layers of espresso and caramel.',
     price: '₱139',
@@ -172,7 +172,7 @@ export const coffeeData: {
   },
   {
     id: '14',
-    title: 'Strawberry Matcha',
+    title: 'Cold Strawberry Matcha',
     media: '/images/17.png',
     author: 'Fresh strawberries and smooth matcha fusion.',
     price: '₱139',
