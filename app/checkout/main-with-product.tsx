@@ -141,8 +141,10 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
     (sum, o) => sum + parseFloat(o.product.price.replace(/[^\d.]/g, '')) * o.quantity,
     0
   );
+  const deliveryFee = 20;
   const discount = isVoucherApplied ? 10 : 0;
-  const grandTotal = baseTotal - discount;
+  const grandTotal = baseTotal + deliveryFee - discount;
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -239,10 +241,18 @@ const ContactPageWithProduct = ({ initialProductId }: ContactPageWithProductProp
                 </div>
               ))}
               <div className="text-right font-semibold text-lg mt-4">
-                Grand Total: ₱{grandTotal.toFixed(2)}
-                {isVoucherApplied && (
-                  <p className="text-sm text-green-600">Discount applied: -₱{discount.toFixed(2)}</p>
-                )}
+                         <div className="mt-6 space-y-1 text-right text-sm text-gray-700">
+  <div>Subtotal: ₱{baseTotal.toFixed(2)}</div>
+  <div className='text-red-400'>Delivery Fee: ₱{deliveryFee.toFixed(2)}</div>
+  {isVoucherApplied && (
+    <div className="text-green-600">Voucher Discount: -₱{discount.toFixed(2)}</div>
+  )}
+  <div className="font-bold text-lg text-black pt-2 border-t mt-2">
+    Grand Total: ₱{grandTotal.toFixed(2)}
+  </div>
+</div>
+
+
               </div>
             </div>
           )}
