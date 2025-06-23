@@ -32,52 +32,55 @@ const ReviewSection: React.FC = () => {
         Hear what our visitors have to say about Pour Decision Cafe!
       </p>
 
-      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4 mb-12">
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          required
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-800"
-        />
+          <div className="max-w-2xl mx-auto space-y-4 mb-12">
+  <input
+    type="text"
+    name="name"
+    placeholder="Your Name"
+    value={form.name}
+    onChange={(e) => setForm({ ...form, name: e.target.value })}
+    required
+    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-800"
+  />
 
-        <div className="flex items-center gap-2">
-          <label className="text-gray-700">Rating:</label>
-          {[1, 2, 3, 4, 5].map((n) => (
-            <button
-              key={n}
-              type="button"
-              onClick={() => setForm({ ...form, rating: n })}
-              className={n <= form.rating ? 'text-yellow-500' : 'text-gray-300'}
-            >
-              <Star size={24} fill={n <= form.rating ? '#facc15' : 'none'} />
-            </button>
-          ))}
-        </div>
+  <div className="flex items-center gap-2">
+    <label className="text-gray-700">Rating:</label>
+    {[1, 2, 3, 4, 5].map((n) => (
+      <button
+        key={n}
+        type="button"
+        onClick={() => setForm({ ...form, rating: n })}
+        className={n <= form.rating ? 'text-yellow-500' : 'text-gray-300'}
+      >
+        <Star size={24} fill={n <= form.rating ? '#facc15' : 'none'} />
+      </button>
+    ))}
+  </div>
 
-        <textarea
-          name="comment"
-          placeholder="Your Review"
-          value={form.comment}
-          onChange={(e) => setForm({ ...form, comment: e.target.value })}
-          required
-          rows={4}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-800"
-        />
+  <textarea
+    name="comment"
+    placeholder="Your Review"
+    value={form.comment}
+    onChange={(e) => setForm({ ...form, comment: e.target.value })}
+    required
+    rows={4}
+    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-800"
+  />
 
-        <button
-          type="submit"
-          className="bg-yellow-800 text-white px-6 py-2 rounded-lg hover:bg-yellow-900 transition w-full md:w-auto"
-        >
-          Submit Review
-        </button>
-      </form>
+  <a
+    href="https://g.page/r/CegVTT1F-yolEAE/review"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-block bg-yellow-800 text-white px-6 py-2 rounded-lg hover:bg-yellow-900 transition w-full md:w-auto text-center"
+  >
+    Submit Review on Google
+  </a>
+</div>
+
 
       <div className="max-w-3xl mx-auto space-y-6">
         {reviews.length === 0 ? (
-          <p className="text-gray-500 text-center">No reviews yet. Be the first!</p>
+          <p className="text-gray-500 text-center">No reviews yet. Be the first! https://g.page/r/CegVTT1F-yolEAE/review</p>
         ) : (
           reviews.map((r, i) => (
             <div
